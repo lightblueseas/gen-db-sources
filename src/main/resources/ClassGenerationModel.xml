@@ -1,0 +1,16 @@
+<de.alpharogroup.gen.src.model.ClassGenerationModel>
+	<qualifiedModelClassNames class="linked-hash-set"/>
+	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
+	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
+	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
+	<srcFolder>src/main/java/</srcFolder>
+	<srcTestFolder>src/test/java/</srcTestFolder>
+	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
+	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
+	<templateDir>src/main/resources/</templateDir>
+	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
+	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
+	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
+	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
+	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>				
+</de.alpharogroup.gen.src.model.ClassGenerationModel>

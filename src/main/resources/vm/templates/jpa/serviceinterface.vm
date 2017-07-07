@@ -1,0 +1,7 @@
+package ${model.servicePackageName};
+
+import $model.modelQuilifiedClassName;
+import de.alpharogroup.db.service.api.BusinessService;
+
+public interface ${model.modelClassName}Service extends BusinessService<$model.modelClassName, $model.primaryKeyClassName> {
+}

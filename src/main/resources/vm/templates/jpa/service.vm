@@ -1,0 +1,24 @@
+package $model.servicePackageName;
+
+import de.alpharogroup.db.service.jpa.AbstractBusinessService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ${model.repositoryPackageName}.${model.repositoryClassName};
+import $model.modelQuilifiedClassName;
+import ${model.servicePackageName}.${model.modelClassName}Service;
+
+@Transactional
+@Service("${model.repServiceClassName}")
+public class ${model.modelClassName}BusinessService extends AbstractBusinessService<$model.modelClassName, $model.primaryKeyClassName, ${model.repositoryClassName}> implements ${model.modelClassName}Service {
+
+	private static final long serialVersionUID = 1L;
+
+	@Autowired
+	public void set${model.repositoryClassName}(${model.repositoryClassName} ${model.repSpringRefClassName}) {
+		setDao(${model.repSpringRefClassName});
+	}
+
+}

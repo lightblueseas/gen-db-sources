@@ -1,0 +1,18 @@
+package $model.repositoryPackageName;
+
+import de.alpharogroup.db.dao.jpa.JpaEntityManagerDao;
+
+import org.springframework.stereotype.Repository;
+
+import $model.modelQuilifiedClassName;
+
+@Repository("$model.repSpringRefClassName")
+public class $model.repositoryClassName extends JpaEntityManagerDao<$model.modelClassName, $model.primaryKeyClassName> 
+{
+
+	/**
+	 * The serialVersionUID.
+	 */
+	private static final long serialVersionUID = 1L;
+	
+}

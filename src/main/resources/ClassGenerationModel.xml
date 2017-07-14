@@ -12,5 +12,7 @@
 	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
 	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
 	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
-	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>				
+	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>	
+	<businessPom>src/main/resources/vm/templates/jpa/business-pom.vm</businessPom>
+	<dataPom>src/main/resources/vm/templates/jpa/business-pom.vm</dataPom>				
 </de.alpharogroup.gen.src.model.ClassGenerationModel>

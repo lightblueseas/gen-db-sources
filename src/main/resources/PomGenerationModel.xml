@@ -1,0 +1,11 @@
+<de.alpharogroup.gen.src.model.PomGenerationBean>
+	<parentName>quiz-system</parentName>
+	<businessPom>src/main/resources/vm/templates/jpa/business-pom.vm</businessPom>
+	<dataPom>src/main/resources/vm/templates/jpa/data-project-pom.vm</dataPom>	
+	<domainPom>src/main/resources/vm/templates/jpa/domain-pom.vm</domainPom>	
+	<entitiesPom>src/main/resources/vm/templates/jpa/entities-pom.vm</entitiesPom>	
+	<initPom>src/main/resources/vm/templates/jpa/init-pom.vm</initPom>	
+	<restApiPom>src/main/resources/vm/templates/jpa/rest-api-pom.vm</restApiPom>	
+	<restClientPom>src/main/resources/vm/templates/jpa/rest-client-pom.vm</restClientPom>	
+	<restWebPom>src/main/resources/vm/templates/jpa/rest-web-pom.vm</restWebPom>				
+</de.alpharogroup.gen.src.model.PomGenerationBean>

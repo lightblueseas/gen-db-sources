@@ -43,8 +43,9 @@ public class GeneratorExtensions
 	 */
 	public static void main(final String[] args) throws Exception
 	{
-		// generateRepositoryClasses();
-
+		 generateRepositoryClasses();
+//		final String pomGenerationBean = "PomGenerationModel.xml";
+//		loadPomGenerationModel(pomGenerationBean);
 	}
 
 
@@ -88,13 +89,13 @@ public class GeneratorExtensions
 	/**
 	 * Load class generation model.
 	 *
-	 * @param classGenerationModel
-	 *            the class generation model
+	 * @param pomGenerationBean
+	 *            the pom generation bean
 	 * @return the class generation model
 	 */
-	public static PomGenerationBean loadPomGenerationModel(final String classGenerationModel)
+	public static PomGenerationBean loadPomGenerationModel(final String pomGenerationBean)
 	{
-		final InputStream is = ClassExtensions.getResourceAsStream(classGenerationModel);
+		final InputStream is = ClassExtensions.getResourceAsStream(pomGenerationBean);
 		final String xml = ReadFileExtensions.inputStream2String(is);
 		final PomGenerationBean generationData = XmlExtensions.toObjectWithXStream(xml);
 		return generationData;
@@ -150,8 +151,8 @@ public class GeneratorExtensions
 	 *
 	 * @param generator
 	 *            the generator
-	 * @param daoModels
-	 *            the dao models
+	 * @param repositoryModels
+	 *            the repository models
 	 * @throws IOException
 	 *             the IO exception
 	 */

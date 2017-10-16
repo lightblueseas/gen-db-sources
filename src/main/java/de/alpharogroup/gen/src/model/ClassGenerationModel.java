@@ -33,5 +33,7 @@ public class ClassGenerationModel {
     private String serviceInterfaceTemplateFile;
     private String srcServiceGenerationPackage;
     private String repositoryTestClassTemplateFile;
+    private String businessPom;
+    private String dataPom;
 
 }

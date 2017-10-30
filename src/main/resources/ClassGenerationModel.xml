@@ -1,6 +1,7 @@
 <de.alpharogroup.gen.src.model.ClassGenerationModel>
 	<qualifiedModelClassNames class="linked-hash-set"/>
 	<modelPackageName>de.alpharogroup.user.entities</modelPackageName>
+	<domainPackageName>de.alpharogroup.user.domain</domainPackageName>
 	<repositoryPackageName>de.alpharogroup.user.repositories</repositoryPackageName>
 	<servicePackageName>de.alpharogroup.user.service</servicePackageName>
 	<domainServicePackageName>de.alpharogroup.user.service</domainServicePackageName>
@@ -10,11 +11,13 @@
 	<srcTestGenerationPackage>de/alpharogroup/user/repositories/</srcTestGenerationPackage>
 	<templateDir>src/main/resources/</templateDir>
 	<srcServiceGenerationPackage>de/alpharogroup/user/service/</srcServiceGenerationPackage>
+	<srcDomainGenerationPackage>de/alpharogroup/user/domain/</srcDomainGenerationPackage>
 	<srcDomainServiceGenerationPackage>de/alpharogroup/user/service/</srcDomainServiceGenerationPackage>
 	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
 	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
 	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
 	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>	
+	<domainClassTemplateFile>src/main/resources/vm/templates/jpa/domain-object.vm</domainClassTemplateFile>	
 	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
 	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>		
 </de.alpharogroup.gen.src.model.ClassGenerationModel>

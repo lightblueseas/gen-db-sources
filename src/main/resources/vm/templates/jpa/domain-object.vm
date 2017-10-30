@@ -1,7 +1,6 @@
-package de.alpharogroup.user.domain;
+package ${model.domainPackageName};
 
 import de.alpharogroup.domain.BaseDomainObject;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,9 +13,8 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class Permission extends BaseDomainObject<Integer>
+public class ${model.domainClassName} extends BaseDomainObject<Integer>
 {
 	/** The serial Version UID */
 	private static final long serialVersionUID = 1L;

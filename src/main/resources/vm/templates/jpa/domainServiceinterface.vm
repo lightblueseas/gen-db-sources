@@ -1,6 +1,6 @@
 package ${model.servicePackageName};
 
-import $model.modelQuilifiedClassName;
+import ${model.domainPackageName}.${model.domainClassName};
 import de.alpharogroup.service.domain.DomainService;
 
 /**

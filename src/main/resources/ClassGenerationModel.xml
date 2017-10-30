@@ -1,16 +1,20 @@
 <de.alpharogroup.gen.src.model.ClassGenerationModel>
 	<qualifiedModelClassNames class="linked-hash-set"/>
-	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
-	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
-	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
+	<modelPackageName>de.alpharogroup.user.entities</modelPackageName>
+	<repositoryPackageName>de.alpharogroup.user.repositories</repositoryPackageName>
+	<servicePackageName>de.alpharogroup.user.service</servicePackageName>
+	<domainServicePackageName>de.alpharogroup.user.service</domainServicePackageName>
 	<srcFolder>src/main/java/</srcFolder>
 	<srcTestFolder>src/test/java/</srcTestFolder>
-	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
-	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
+	<srcGenerationPackage>de/alpharogroup/user/repositories/</srcGenerationPackage>
+	<srcTestGenerationPackage>de/alpharogroup/user/repositories/</srcTestGenerationPackage>
 	<templateDir>src/main/resources/</templateDir>
-	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
+	<srcServiceGenerationPackage>de/alpharogroup/user/service/</srcServiceGenerationPackage>
+	<srcDomainServiceGenerationPackage>de/alpharogroup/user/service/</srcDomainServiceGenerationPackage>
 	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
 	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
 	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
-	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>		
+	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>	
+	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
+	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>		
 </de.alpharogroup.gen.src.model.ClassGenerationModel>

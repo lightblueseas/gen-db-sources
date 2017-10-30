@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>persistence-api</artifactId>
-		<version>3.30.0</version>
+		<version>4.1.0</version>
 		<relativePath />
 	</parent>
 	
@@ -13,11 +13,11 @@
   
 	<properties>
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.21.0-SNAPSHOT</jcommons-lang.version>
+		<jcommons-lang.version>4.25.0</jcommons-lang.version>
 		<!-- XML-EXTENSIONS version -->
 		<xml-extensions.version>4.16.0</xml-extensions.version>
-		<data-usertype.version>3.30.0</data-usertype.version>
-		<data-api.version>3.30.0</data-api.version>
+		<data-usertype.version>4.1.0</data-usertype.version>
+		<data-api.version>4.1.0</data-api.version>
 	</properties>
 	
 
@@ -48,7 +48,6 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>jcommons-lang</artifactId>
-			<version>${jcommons-lang.version}</version>
 		</dependency>
 
 		<dependency>
@@ -69,6 +68,11 @@
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>business-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>domain-api</artifactId>
 		</dependency>
 
 	</dependencies>

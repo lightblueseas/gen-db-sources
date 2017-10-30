@@ -164,7 +164,7 @@ public class GeneratorExtensions
 
 			final VelocityContext context = new VelocityContext();
 			context.put("model", model);
-
+			// Velocity Template for the repository classes...
 			final Template repositoryClassTemplate = Velocity
 				.getTemplate(generator.getRepositoryClassTemplateFile());
 
@@ -178,8 +178,8 @@ public class GeneratorExtensions
 			repositoryClassTemplate.merge(context, writer);
 			writer.flush();
 			writer.close();
-
-			final Template daoTestClassTemplate = Velocity
+			// Velocity Template for the repository unit test classes...
+			final Template repositoryTestClassTemplate = Velocity
 				.getTemplate(generator.getRepositoryTestClassTemplateFile());
 			final String daoTestClassPath = generator.getSrcTestFolder()
 				+ generator.getSrcTestGenerationPackage() + model.getRepositoryClassName()
@@ -189,10 +189,10 @@ public class GeneratorExtensions
 			final BufferedWriter daoTestClassWriter = new BufferedWriter(
 				new FileWriter(daoTestClassPath));
 
-			daoTestClassTemplate.merge(context, daoTestClassWriter);
+			repositoryTestClassTemplate.merge(context, daoTestClassWriter);
 			daoTestClassWriter.flush();
 			daoTestClassWriter.close();
-
+			// Velocity Template for the business services intefaces...
 			final Template serviceInterfaceTemplate = Velocity
 				.getTemplate(generator.getServiceInterfaceTemplateFile());
 			final String serviceInterfaceClassPath = generator.getSrcFolder()
@@ -207,22 +207,48 @@ public class GeneratorExtensions
 			serviceInterfaceTemplate.merge(context, serviceInterfaceWriter);
 			serviceInterfaceWriter.flush();
 			serviceInterfaceWriter.close();
-			final Template serviceClassTemplate = Velocity
-				.getTemplate(generator.getServiceClassTemplateFile());
-			final String serviceClassPath = generator.getSrcFolder()
-				+ generator.getSrcServiceGenerationPackage() + model.getModelClassName()
+			// Velocity Template for the business services classes...
+			final String serviceClassPath =
+				  generator.getSrcFolder()
+				+ generator.getSrcServiceGenerationPackage()
+				+ model.getModelClassName()
 				+ "Business" + FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
-			f = new File(serviceClassPath);
-			CreateFileExtensions.newFileQuietly(f);
-			final BufferedWriter serviceClassWriter = new BufferedWriter(
-				new FileWriter(generator.getSrcFolder() + generator.getSrcServiceGenerationPackage()
-					+ model.getModelClassName() + "Business" + FileSuffix.SERVICE
-					+ FileExtension.JAVA.getExtension()));
 
-			serviceClassTemplate.merge(context, serviceClassWriter);
-			serviceClassWriter.flush();
-			serviceClassWriter.close();
+			mergeToContext(context, generator.getServiceClassTemplateFile(), serviceClassPath);
+
+//			final Template serviceClassTemplate = Velocity
+//				.getTemplate(generator.getServiceClassTemplateFile());
+//			f = new File(serviceClassPath);
+//			CreateFileExtensions.newFileQuietly(f);
+//			final BufferedWriter serviceClassWriter = new BufferedWriter(
+//				new FileWriter(serviceClassPath));
+//
+//			serviceClassTemplate.merge(context, serviceClassWriter);
+//			serviceClassWriter.flush();
+//			serviceClassWriter.close();
+
+			// Velocity Template for the domain services intefaces...
+			final String domainServiceInterfaceClassPath = generator.getSrcFolder()
+				+ generator.getSrcDomainServiceGenerationPackage() + model.getDomainServiceClassName()
+				+ FileExtension.JAVA.getExtension();
+			mergeToContext(context, generator.getDomainServiceInterfaceTemplateFile(), domainServiceInterfaceClassPath);
 		}
+	}
+
+
+	private static void mergeToContext(final VelocityContext context, String templateFileName, String className) throws IOException
+	{
+		File f;
+		final Template domainServiceInterfaceTemplate = Velocity
+			.getTemplate(templateFileName);
+		f = new File(className);
+		CreateFileExtensions.newFileQuietly(f);
+		final BufferedWriter domainServiceInterfaceWriter = new BufferedWriter(
+			new FileWriter(className));
+
+		domainServiceInterfaceTemplate.merge(context, domainServiceInterfaceWriter);
+		domainServiceInterfaceWriter.flush();
+		domainServiceInterfaceWriter.close();
 	}
 
 	/**
@@ -243,6 +269,7 @@ public class GeneratorExtensions
 
 			final String modelClassName = clazz.substring(clazz.lastIndexOf(".") + 1,
 				clazz.length());
+			final String domainClassName = modelClassName.substring(0, modelClassName.length()-1);
 			if (modelClassName.equals("package-info"))
 			{
 				continue;
@@ -253,8 +280,8 @@ public class GeneratorExtensions
 				final Class modelClass = Class.forName(clazz);
 				final Class primaryKeyClassType = TypeArgumentsExtensions
 					.getFirstTypeArgument(ClassExtensions.getBaseClass(modelClass), modelClass);
-
-				model.setPrimaryKeyClassName(primaryKeyClassType.getName());
+				final String className = primaryKeyClassType.getName();
+				model.setPrimaryKeyClassName(className);
 			}
 			catch (final ClassNotFoundException e)
 			{
@@ -282,6 +309,14 @@ public class GeneratorExtensions
 			model.setModelClassName(modelClassName);
 			model.setModelInstanceName(
 				StringExtensions.firstCharacterToLowerCase(model.getModelClassName()));
+			model.setDomainClassName(domainClassName);
+
+			final String domainServiceInterfaceName = domainClassName + FileSuffix.SERVICE;
+			final String repDomainServiceClassName = StringExtensions
+				.firstCharacterToLowerCase(domainServiceInterfaceName);
+			model.setRepDomainServiceClassName(repDomainServiceClassName);
+			model.setDomainServiceClassName(domainServiceInterfaceName );
+
 		}
 		return repositoryModels;
 	}

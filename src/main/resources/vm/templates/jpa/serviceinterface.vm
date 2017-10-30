@@ -3,5 +3,9 @@ package ${model.servicePackageName};
 import $model.modelQuilifiedClassName;
 import de.alpharogroup.db.service.api.BusinessService;
 
-public interface ${model.modelClassName}Service extends BusinessService<$model.modelClassName, $model.primaryKeyClassName> {
+/**
+ * The service interface {@link ${model.modelClassName}Service}.
+ */
+public interface ${model.modelClassName}Service extends BusinessService<$model.modelClassName, $model.primaryKeyClassName>
+{
 }

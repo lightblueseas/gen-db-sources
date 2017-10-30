@@ -24,9 +24,13 @@ public class RepositoryClassModel implements Serializable
 
 	private String modelPackageName;
 
+	private String domainPackageName;
+
 	private String repositoryPackageName;
 
 	private String servicePackageName;
+
+	private String domainServicePackageName;
 
 	private String modelQuilifiedClassName;
 
@@ -34,11 +38,17 @@ public class RepositoryClassModel implements Serializable
 
 	private String repServiceClassName;
 
+	private String repDomainServiceClassName;
+
 	private String serviceClassName;
+
+	private String domainServiceClassName;
 
 	private String repositoryClassName;
 
 	private String modelClassName;
+
+	private String domainClassName;
 
 	private String modelInstanceName;
 

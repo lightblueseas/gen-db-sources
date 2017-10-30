@@ -23,6 +23,7 @@ public class ClassGenerationModel {
     private String modelPackageName;
     private String repositoryPackageName;
     private String servicePackageName;
+    private String domainServicePackageName;
     private String srcFolder;
     private String srcTestFolder;
     private String srcGenerationPackage;
@@ -31,7 +32,10 @@ public class ClassGenerationModel {
     private String repositoryClassTemplateFile;
     private String serviceClassTemplateFile;
     private String serviceInterfaceTemplateFile;
+    private String domainServiceClassTemplateFile;
+    private String domainServiceInterfaceTemplateFile;
     private String srcServiceGenerationPackage;
+    private String srcDomainServiceGenerationPackage;
     private String repositoryTestClassTemplateFile;
     private String businessPom;
     private String dataPom;

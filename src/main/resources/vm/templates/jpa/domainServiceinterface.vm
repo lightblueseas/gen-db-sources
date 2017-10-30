@@ -1,0 +1,11 @@
+package ${model.servicePackageName};
+
+import $model.modelQuilifiedClassName;
+import de.alpharogroup.service.domain.DomainService;
+
+/**
+ * The domain service interface {@link ${model.domainClassName}Service}.
+ */
+public interface ${model.domainClassName}Service extends DomainService<$model.primaryKeyClassName, $model.domainClassName>
+{
+}

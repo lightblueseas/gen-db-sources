@@ -1,4 +1,4 @@
-package $model.servicePackageName;
+package $model.domainServicePackageName;
 
 import de.alpharogroup.db.service.AbstractBusinessService;
 
@@ -14,12 +14,12 @@ import ${model.servicePackageName}.${model.modelClassName}Service;
  * The service class {@link ${model.modelClassName}BusinessService}.
  */
 @Transactional
-@Service("${model.repServiceClassName}")
-public class ${model.modelClassName}BusinessService 
-	extends
-		AbstractBusinessService<$model.modelClassName, $model.primaryKeyClassName, ${model.repositoryClassName}> 
+@Service("${model.repDomainServiceClassName}")
+public class ${model.domainClassName}BusinessService 
+	extends 
+		AbstractBusinessService<$model.primaryKeyClassName, ${model.domainClassName}, ${model.modelClassName}, ${model.repositoryClassName}, ${model.modelClassName}Mapper>	
 	implements 
-		${model.modelClassName}Service
+		${model.domainClassName}Service
 {
 
 	/** The Constant serialVersionUID. */

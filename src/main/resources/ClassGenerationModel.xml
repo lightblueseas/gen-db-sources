@@ -3,6 +3,7 @@
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
 	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
 	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
+	<domainMapperPackageName>de.alpharogroup.questionaries.system.domain</domainMapperPackageName>
 	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
 	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
 	<domainServicePackageName>de.alpharogroup.questionaries.system.domain.service</domainServicePackageName>
@@ -13,12 +14,14 @@
 	<templateDir>src/main/resources/</templateDir>
 	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
 	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>
+	<srcDomainMapperGenerationPackage>de/alpharogroup/questionaries/system/mapper/</srcDomainMapperGenerationPackage>
 	<srcDomainServiceGenerationPackage>de/alpharogroup/questionaries/system/domain/service/</srcDomainServiceGenerationPackage>
 	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
 	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
 	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
 	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>	
-	<domainClassTemplateFile>src/main/resources/vm/templates/jpa/domain-object.vm</domainClassTemplateFile>	
+	<domainClassTemplateFile>src/main/resources/vm/templates/jpa/domain-object.vm</domainClassTemplateFile>		
+	<domainMapperClassTemplateFile>src/main/resources/vm/templates/jpa/domain-mapper.vm</domainMapperClassTemplateFile>	
 	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
 	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>		
 </de.alpharogroup.gen.src.model.ClassGenerationModel>

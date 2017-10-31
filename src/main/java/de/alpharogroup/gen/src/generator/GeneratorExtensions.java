@@ -196,6 +196,13 @@ public class GeneratorExtensions
 				+ FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getDomainClassTemplateFile(), domainClassPath);
 
+			// Velocity Template for the domain mapper object...
+			final String domainMapperClassPath = generator.getSrcFolder()
+				+ generator.getSrcDomainMapperGenerationPackage() + model.getModelClassName()
+				+ "Mapper"
+				+ FileExtension.JAVA.getExtension();
+			mergeToContext(context, generator.getDomainMapperClassTemplateFile(), domainMapperClassPath);
+
 			// Velocity Template for the domain services intefaces...
 			final String domainServiceInterfaceClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainServiceGenerationPackage() + model.getDomainServiceClassName()

@@ -15,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Questions extends BaseEntity<Integer>
 {
+	private static final long serialVersionUID = 1L;
 	private String foo;
 
 }

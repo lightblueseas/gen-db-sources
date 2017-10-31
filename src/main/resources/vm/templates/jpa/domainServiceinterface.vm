@@ -1,4 +1,4 @@
-package ${model.servicePackageName};
+package ${model.domainServicePackageName};
 
 import ${model.domainPackageName}.${model.domainClassName};
 import de.alpharogroup.service.domain.DomainService;

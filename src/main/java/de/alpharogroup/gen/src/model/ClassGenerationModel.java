@@ -20,6 +20,7 @@ import lombok.ToString;
 public class ClassGenerationModel {
 
     private Set<String> qualifiedModelClassNames;
+    private String basePackageName;
     private String modelPackageName;
     private String domainPackageName;
     private String repositoryPackageName;

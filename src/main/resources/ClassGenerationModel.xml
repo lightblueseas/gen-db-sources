@@ -1,18 +1,19 @@
 <de.alpharogroup.gen.src.model.ClassGenerationModel>
 	<qualifiedModelClassNames class="linked-hash-set"/>
-	<modelPackageName>de.alpharogroup.user.entities</modelPackageName>
-	<domainPackageName>de.alpharogroup.user.domain</domainPackageName>
-	<repositoryPackageName>de.alpharogroup.user.repositories</repositoryPackageName>
-	<servicePackageName>de.alpharogroup.user.service</servicePackageName>
-	<domainServicePackageName>de.alpharogroup.user.service</domainServicePackageName>
+	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
+	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
+	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
+	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
+	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
+	<domainServicePackageName>de.alpharogroup.questionaries.system.domain.service</domainServicePackageName>
 	<srcFolder>src/main/java/</srcFolder>
 	<srcTestFolder>src/test/java/</srcTestFolder>
-	<srcGenerationPackage>de/alpharogroup/user/repositories/</srcGenerationPackage>
-	<srcTestGenerationPackage>de/alpharogroup/user/repositories/</srcTestGenerationPackage>
+	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
+	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
 	<templateDir>src/main/resources/</templateDir>
-	<srcServiceGenerationPackage>de/alpharogroup/user/service/</srcServiceGenerationPackage>
-	<srcDomainGenerationPackage>de/alpharogroup/user/domain/</srcDomainGenerationPackage>
-	<srcDomainServiceGenerationPackage>de/alpharogroup/user/service/</srcDomainServiceGenerationPackage>
+	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
+	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>
+	<srcDomainServiceGenerationPackage>de/alpharogroup/questionaries/system/domain/service/</srcDomainServiceGenerationPackage>
 	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
 	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
 	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>

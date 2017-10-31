@@ -270,6 +270,7 @@ public class GeneratorExtensions
 			model.setServiceClassName(serviceInterfaceName);
 			model.setRepServiceClassName(repServiceClassName);
 			model.setServicePackageName(generator.getServicePackageName());
+			model.setDomainServicePackageName(generator.getDomainServicePackageName());
 			model.setModelPackageName(generator.getModelPackageName());
 			model.setRepositoryPackageName(generator.getRepositoryPackageName());
 			model.setModelQuilifiedClassName(clazz);

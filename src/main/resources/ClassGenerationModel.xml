@@ -1,4 +1,4 @@
-<de.alpharogroup.gen.src.model.ClassGenerationModel>
+<de.alpharogroup.gen.src.model.ClassGenerationModelBean>
 	<qualifiedModelClassNames class="linked-hash-set"/>
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
 	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
@@ -24,4 +24,4 @@
 	<domainMapperClassTemplateFile>src/main/resources/vm/templates/jpa/domain-mapper.vm</domainMapperClassTemplateFile>	
 	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
 	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>		
-</de.alpharogroup.gen.src.model.ClassGenerationModel>
+</de.alpharogroup.gen.src.model.ClassGenerationModelBean>

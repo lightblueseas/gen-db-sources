@@ -17,7 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class ClassGenerationModel {
+public class ClassGenerationModelBean {
 
     private Set<String> qualifiedModelClassNames;
     private String basePackageName;

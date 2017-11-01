@@ -17,7 +17,7 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FileSuffix;
 import de.alpharogroup.file.create.CreateFileExtensions;
 import de.alpharogroup.file.read.ReadFileExtensions;
-import de.alpharogroup.gen.src.model.ClassGenerationModel;
+import de.alpharogroup.gen.src.model.ClassGenerationModelBean;
 import de.alpharogroup.gen.src.model.PomGenerationBean;
 import de.alpharogroup.gen.src.model.RepositoryClassModel;
 import de.alpharogroup.lang.ClassExtensions;
@@ -45,8 +45,8 @@ public class GeneratorExtensions
 	 * @throws IOException
 	 *             the IO exception
 	 */
-	public static void generateClasses(final ClassGenerationModel generator,
-		final List<RepositoryClassModel> repositoryModels) throws IOException
+	public static void generateClasses(final ClassGenerationModelBean generator,
+		final List<RepositoryClassModel> repositoryModels, final PomGenerationBean pomGenerationData) throws IOException
 	{
 		for (final RepositoryClassModel model : repositoryModels)
 		{
@@ -54,10 +54,11 @@ public class GeneratorExtensions
 			final VelocityContext context = new VelocityContext();
 			context.put("model", model);
 			// Velocity Template for the repository classes...
+			final String entitiesProjectPath = getEntitiesProjectPath(pomGenerationData);
 			final String repositoryClassPath = generator.getSrcFolder()
 				+ generator.getSrcGenerationPackage() + model.getRepositoryClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getRepositoryClassTemplateFile(), repositoryClassPath);
+			mergeToContext(context, generator.getRepositoryClassTemplateFile(), entitiesProjectPath + "/" + repositoryClassPath);
 
 			// Velocity Template for the repository unit test classes...
 			final String repositoryTestClassPath = generator.getSrcTestFolder()
@@ -116,49 +117,50 @@ public class GeneratorExtensions
 		context.put("model", generationData);
 
 		// Generate parent data pom.xml
-		final String parentDataPomClassPath = generationData.getParentName() + "/"
+		final String parentProjectPath = getParentProjectPath(generationData);
+		final String parentDataPomClassPath = parentProjectPath + "/"
 			 + POM_XML_FILENAME;
 		mergeToContext(context, generationData.getDataPom(), parentDataPomClassPath);
 
 		// Generate business pom.xml
-		final String businessPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-business" + "/" + POM_XML_FILENAME;
+		final String businessProjectPath = getBusinessProjectPath(generationData);
+		final String businessPomClassPath = businessProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getBusinessPom(), businessPomClassPath);
 
 		// Generate domain pom.xml
-		final String domainPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-domain" + "/" + POM_XML_FILENAME;
+		final String domainProjectPath = getDomainProjectPath(generationData);
+		final String domainPomClassPath = domainProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getDomainPom(), domainPomClassPath);
 
 		// Generate entities pom.xml
-		final String entitiesPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-entities" + "/" + POM_XML_FILENAME;
+		final String entitiesProjectPath = getEntitiesProjectPath(generationData);
+		final String entitiesPomClassPath = entitiesProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getEntitiesPom(), entitiesPomClassPath);
 
 		// Generate init pom.xml
-		final String initPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-init" + "/" + POM_XML_FILENAME;
+		final String initProjectPath = getInitProjectPath(generationData);
+		final String initPomClassPath = initProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getInitPom(), initPomClassPath);
 
 		// Generate rest-api pom.xml
-		final String restApiPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-rest-api" + "/" + POM_XML_FILENAME;
+		final String restApiProjectPath = getRestApiProjectPath(generationData);
+		final String restApiPomClassPath = restApiProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getRestApiPom(), restApiPomClassPath);
 
 		// Generate rest-client pom.xml
-		final String restClientPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-rest-client" + "/" + POM_XML_FILENAME;
+		final String restClientProjectPath = getRestClientProjectPath(generationData);
+		final String restClientPomClassPath = restClientProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getRestClientPom(), restClientPomClassPath);
 
 		// Generate rest-web pom.xml
-		final String restWebPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-rest-web" + "/" + POM_XML_FILENAME;
+		final String restWebProjectPath = getRestWebProjectPath(generationData);
+		final String restWebPomClassPath = restWebProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
 
@@ -173,16 +175,54 @@ public class GeneratorExtensions
 	public static void generateRepositoryClasses() throws Exception
 	{
 		final String classGenerationModel = "ClassGenerationModel.xml";
+		final String pomGenerationModel = "PomGenerationModel.xml";
 
-		final ClassGenerationModel generationData = loadClassGenerationModel(classGenerationModel);
+		final PomGenerationBean pomGenerationData = loadPomGenerationModel(pomGenerationModel);
 
-		initializeQualifiedModelClassNames(generationData);
+		final ClassGenerationModelBean classGenerationData = loadClassGenerationModel(classGenerationModel);
+
+		initializeQualifiedModelClassNames(classGenerationData);
 
 		final List<RepositoryClassModel> repositoryModels = getRepositoryClassModels(
-			generationData);
+			classGenerationData);
 
-		generateClasses(generationData, repositoryModels);
+		generateClasses(classGenerationData, repositoryModels, pomGenerationData);
 
+	}
+
+	private static String getBusinessProjectPath(final PomGenerationBean generationData)
+	{
+		final String businessPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-business";
+		return businessPomClassPath;
+	}
+
+
+	private static String getDomainProjectPath(final PomGenerationBean generationData)
+	{
+		final String domainPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-domain" ;
+		return domainPomClassPath;
+	}
+
+	private static String getEntitiesProjectPath(final PomGenerationBean generationData)
+	{
+		final String projectPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-entities" ;
+		return projectPath;
+	}
+
+	private static String getInitProjectPath(final PomGenerationBean generationData)
+	{
+		final String projectPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-init" ;
+		return projectPath;
+	}
+
+	private static String getParentProjectPath(final PomGenerationBean generationData)
+	{
+		final String domainPomClassPath = generationData.getParentName();
+		return domainPomClassPath;
 	}
 
 	public static void getPomGenerationModel(final PomGenerationBean generator)
@@ -199,7 +239,7 @@ public class GeneratorExtensions
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<RepositoryClassModel> getRepositoryClassModels(
-		final ClassGenerationModel generator)
+		final ClassGenerationModelBean generator)
 	{
 		final List<RepositoryClassModel> repositoryModels = new ArrayList<>();
 		for (final String clazz : generator.getQualifiedModelClassNames())
@@ -262,6 +302,27 @@ public class GeneratorExtensions
 		return repositoryModels;
 	}
 
+	private static String getRestApiProjectPath(final PomGenerationBean generationData)
+	{
+		final String projectPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-api" ;
+		return projectPath;
+	}
+
+	private static String getRestClientProjectPath(final PomGenerationBean generationData)
+	{
+		final String projectPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-client" ;
+		return projectPath;
+	}
+
+	private static String getRestWebProjectPath(final PomGenerationBean generationData)
+	{
+		final String projectPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-web" ;
+		return projectPath;
+	}
+
 
 	/**
 	 * Reads the qualified entity class names from the entities in the specified package.
@@ -271,7 +332,7 @@ public class GeneratorExtensions
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static void initializeQualifiedModelClassNames(final ClassGenerationModel generationData)
+	public static void initializeQualifiedModelClassNames(final ClassGenerationModelBean generationData)
 		throws Exception
 	{
 		final Set<String> qualifiedModelClassNames = PackageExtensions
@@ -286,11 +347,11 @@ public class GeneratorExtensions
 	 *            the class generation model
 	 * @return the class generation model
 	 */
-	public static ClassGenerationModel loadClassGenerationModel(final String classGenerationModel)
+	public static ClassGenerationModelBean loadClassGenerationModel(final String classGenerationModel)
 	{
 		final InputStream is = ClassExtensions.getResourceAsStream(classGenerationModel);
 		final String xml = ReadFileExtensions.inputStream2String(is);
-		final ClassGenerationModel generationData = XmlExtensions.toObjectWithXStream(xml);
+		final ClassGenerationModelBean generationData = XmlExtensions.toObjectWithXStream(xml);
 		return generationData;
 	}
 

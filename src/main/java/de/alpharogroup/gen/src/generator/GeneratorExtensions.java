@@ -33,6 +33,8 @@ import de.alpharogroup.xml.XmlExtensions;
 public class GeneratorExtensions
 {
 
+	private static final String POM_XML_FILENAME = "pom.xml";
+
 	/**
 	 * Generate classes.
 	 *
@@ -113,10 +115,52 @@ public class GeneratorExtensions
 		final VelocityContext context = new VelocityContext();
 		context.put("model", generationData);
 
+		// Generate parent data pom.xml
+		final String parentDataPomClassPath = generationData.getParentName() + "/"
+			 + POM_XML_FILENAME;
+		mergeToContext(context, generationData.getDataPom(), parentDataPomClassPath);
+
+		// Generate business pom.xml
 		final String businessPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-business" + "/" + "pom.xml";
+			+ generationData.getParentName() + "-business" + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getBusinessPom(), businessPomClassPath);
+
+		// Generate domain pom.xml
+		final String domainPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-domain" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getDomainPom(), domainPomClassPath);
+
+		// Generate entities pom.xml
+		final String entitiesPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-entities" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getEntitiesPom(), entitiesPomClassPath);
+
+		// Generate init pom.xml
+		final String initPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-init" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getInitPom(), initPomClassPath);
+
+		// Generate rest-api pom.xml
+		final String restApiPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-api" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getRestApiPom(), restApiPomClassPath);
+
+		// Generate rest-client pom.xml
+		final String restClientPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-client" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getRestClientPom(), restClientPomClassPath);
+
+		// Generate rest-web pom.xml
+		final String restWebPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-rest-web" + "/" + POM_XML_FILENAME;
+
+		mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
 
 	}
 

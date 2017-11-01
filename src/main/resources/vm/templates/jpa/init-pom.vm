@@ -4,11 +4,11 @@
 	
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>$model.dataProjectName</artifactId>
-		<version>$model.dataProjectVersion</version>
+		<artifactId>${model.dataProjectName}</artifactId>
+		<version>${model.dataProjectVersion}</version>
 	</parent>
 	
-	<artifactId>$model.dataProjectName-init</artifactId>
+	<artifactId>${model.parentName}-init</artifactId>
 
 	<dependencies>
 
@@ -19,12 +19,12 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>$model.dataProjectName-entities</artifactId>
+			<artifactId>${model.parentName}-entities</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>$model.dataProjectName-business</artifactId>
+			<artifactId>${model.parentName}-business</artifactId>
 		</dependency>
 		<!-- HIBERNATE DEPENDENCIES -->
 		<dependency>
@@ -91,7 +91,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
 	</dependencies>
 
 	<profiles>
@@ -127,7 +126,7 @@
 								<drop>true</drop>
 								<!-- optional, but useful for later inspection -->
 								<outputfilename>schema.ddl</outputfilename>
-								<persistenceunit>$model.persistenceunitName</persistenceunit>
+								<persistenceunit>${model.persistenceunitName}</persistenceunit>
 							</componentProperties>
 						</configuration>
 					</plugin>
@@ -169,7 +168,6 @@
 			</build>
 
 		</profile>
-
 
 		<profile>
 			<id>create-empty-db</id>

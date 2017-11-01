@@ -12,11 +12,9 @@ public class GeneratorExtensionsTest
 	}
 
 	@Test(enabled = true)
-	public void testGeneratePomFiles()
+	public void testGeneratePomFiles() throws Exception
 	{
-
-		// final String pomGenerationBean = "PomGenerationModel.xml";
-		// loadPomGenerationModel(pomGenerationBean);
+		GeneratorExtensions.generatePomFiles();
 	}
 
 }

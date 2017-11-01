@@ -4,11 +4,11 @@
 	
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>$model.dataProjectName</artifactId>
-		<version>$model.dataProjectVersion</version>
+		<artifactId>${model.dataProjectName}</artifactId>
+		<version>${model.dataProjectVersion}</version>
 	</parent>
 	
-	<artifactId>$model.dataProjectName-domain</artifactId>
+	<artifactId>${model.parentName}-domain</artifactId>
 
 	<dependencies>
 
@@ -19,12 +19,12 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>$model.dataProjectName-entities</artifactId>
+			<artifactId>${model.parentName}-entities</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>$model.dataProjectName-business</artifactId>
+			<artifactId>${model.parentName}-business</artifactId>
 		</dependency>
 
 	</dependencies>

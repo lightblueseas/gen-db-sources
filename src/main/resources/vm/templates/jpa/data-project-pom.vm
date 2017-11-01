@@ -5,12 +5,13 @@
 	<parent>
 		<groupId>de.alpharogroup</groupId>
 		<artifactId>persistence-api</artifactId>
-		<version>$model.dataProjectParentVersion</version>
+		<version>${model.dataProjectParentVersion}</version>
 		<relativePath />
 	</parent>
 
-	<artifactId>$model.dataProjectName</artifactId>
-	<version>$model.dataProjectVersion</version>
+	<artifactId>${model.dataProjectName}</artifactId>
+	
+	<version>${model.dataProjectVersion}</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2015</inceptionYear>
 
@@ -20,12 +21,12 @@
 		Parent project that holds module projects for the persistence of user data.
 	</description>
 
-	<url>https://github.com/lightblueseas/$model.dataProjectName</url>
+	<url>https://github.com/lightblueseas/${model.dataProjectName}</url>
 
 	<scm>
-		<connection>scm:git:git:@github.com:lightblueseas/$model.dataProjectName.git</connection>
-		<developerConnection>scm:git:git@github.com:lightblueseas/$model.dataProjectName.git</developerConnection>
-		<url>git:@github.com:lightblueseas/$model.dataProjectName.git</url>
+		<connection>scm:git:git:@github.com:lightblueseas/${model.dataProjectName}.git</connection>
+		<developerConnection>scm:git:git@github.com:lightblueseas/${model.dataProjectName}.git</developerConnection>
+		<url>git:@github.com:lightblueseas/${model.dataProjectName}.git</url>
 	</scm>
 	
 	<developers>
@@ -52,22 +53,22 @@
 
 	<ciManagement>
 		<system>travis-ci</system>
-		<url>https://travis-ci.org/lightblueseas/$model.dataProjectName</url>
+		<url>https://travis-ci.org/lightblueseas/${model.dataProjectName}</url>
 	</ciManagement>
 
 	<issueManagement>
 		<system>github</system>
-		<url>https://github.com/lightblueseas/$model.dataProjectName/issues</url>
+		<url>https://github.com/lightblueseas/${model.dataProjectName}/issues</url>
 	</issueManagement>
 
 	<modules>
-		<module>$model.dataProjectName-business</module>
-		<module>$model.dataProjectName-domain</module>
-		<module>$model.dataProjectName-entities</module>
-		<module>$model.dataProjectName-init</module>
-		<module>$model.dataProjectName-rest-api</module>
-		<module>$model.dataProjectName-rest-client</module>
-		<module>$model.dataProjectName-rest-web</module>
+		<module>${model.parentName}-business</module>
+		<module>${model.parentName}-domain</module>
+		<module>${model.parentName}-entities</module>
+		<module>${model.parentName}-init</module>
+		<module>${model.parentName}-rest-api</module>
+		<module>${model.parentName}-rest-client</module>
+		<module>${model.parentName}-rest-web</module>
 	</modules>
 
 	<properties>
@@ -79,31 +80,31 @@
 			<!-- PROJECT-DATA DEPENDENCIES -->
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>$model.dataProjectName-entities</artifactId>
+				<artifactId>${model.parentName}-entities</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>$model.dataProjectName-domain</artifactId>
+				<artifactId>${model.parentName}-domain</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>$model.dataProjectName-business</artifactId>
+				<artifactId>${model.parentName}-business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>$model.dataProjectName-rest-api</artifactId>
+				<artifactId>${model.parentName}-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>de.alpharogroup</groupId>
-				<artifactId>$model.dataProjectName-rest-client</artifactId>
+				<artifactId>${model.parentName}-rest-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

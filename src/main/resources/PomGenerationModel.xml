@@ -1,5 +1,9 @@
 <de.alpharogroup.gen.src.model.PomGenerationBean>
 	<parentName>quiz-system</parentName>
+	<dataProjectName>quiz-system-data</dataProjectName>
+	<dataProjectVersion>1.0.0</dataProjectVersion>
+	<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
+	<persistenceunitName>quiz</persistenceunitName>
 	<businessPom>src/main/resources/vm/templates/jpa/business-pom.vm</businessPom>
 	<dataPom>src/main/resources/vm/templates/jpa/data-project-pom.vm</dataPom>	
 	<domainPom>src/main/resources/vm/templates/jpa/domain-pom.vm</domainPom>	

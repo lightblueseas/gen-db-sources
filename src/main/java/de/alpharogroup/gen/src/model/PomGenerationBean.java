@@ -18,6 +18,11 @@ import lombok.ToString;
 public class PomGenerationBean
 {
 	private String parentName;
+
+	private String dataProjectName;
+	private String dataProjectVersion;
+	private String dataProjectParentVersion;
+	private String persistenceunitName;
     // pom files
     private String businessPom;
     private String dataPom;

@@ -4,11 +4,11 @@
 	
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>$model.dataProjectName</artifactId>
-		<version>$model.dataProjectVersion</version>
+		<artifactId>${model.dataProjectName}</artifactId>
+		<version>${model.dataProjectVersion}</version>
 	</parent>
 	
-	<artifactId>$model.dataProjectName-rest-api</artifactId>
+	<artifactId>${model.parentName}-rest-api</artifactId>
 
 	<dependencies>
 
@@ -19,7 +19,7 @@
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>$model.dataProjectName-domain</artifactId>
+			<artifactId>${model.parentName}-domain</artifactId>
 		</dependency>
 
 		<dependency>

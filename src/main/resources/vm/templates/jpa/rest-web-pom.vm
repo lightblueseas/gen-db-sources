@@ -6,32 +6,32 @@
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
-		<artifactId>address-book-data</artifactId>
-		<version>3.12.1</version>
+		<artifactId>${model.dataProjectName}</artifactId>
+		<version>${model.dataProjectVersion}</version>
 	</parent>
 
-	<artifactId>address-book-rest-web</artifactId>
+	<artifactId>${model.parentName}-rest-web</artifactId>
 	<packaging>war</packaging>
 
 	<properties>
-		<war-name>address-book-rest-webapp</war-name>
+		<war-name>${model.parentName}-rest-webapp</war-name>
 	</properties>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>address-book-rest-api</artifactId>
+			<artifactId>${model.parentName}-rest-api</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>address-book-rest-client</artifactId>
+			<artifactId>${model.parentName}-rest-client</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>address-book-business</artifactId>
+			<artifactId>${model.parentName}-business</artifactId>
 		</dependency>
 
 		<dependency>

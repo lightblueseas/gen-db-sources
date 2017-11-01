@@ -34,119 +34,6 @@ public class GeneratorExtensions
 {
 
 	/**
-	 * The main method.
-	 *
-	 * @param args
-	 *            the args
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void main(final String[] args) throws Exception
-	{
-		 generateRepositoryClasses();
-//		final String pomGenerationBean = "PomGenerationModel.xml";
-//		loadPomGenerationModel(pomGenerationBean);
-	}
-
-
-	/**
-	 * Generate dao classes.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void generateRepositoryClasses() throws Exception
-	{
-		final String classGenerationModel = "ClassGenerationModel.xml";
-
-		final ClassGenerationModel generationData = loadClassGenerationModel(classGenerationModel);
-
-		initializeQualifiedModelClassNames(generationData);
-
-		final List<RepositoryClassModel> repositoryModels = getRepositoryClassModels(
-			generationData);
-
-		generateClasses(generationData, repositoryModels);
-
-	}
-
-	/**
-	 * Load class generation model.
-	 *
-	 * @param classGenerationModel
-	 *            the class generation model
-	 * @return the class generation model
-	 */
-	public static ClassGenerationModel loadClassGenerationModel(final String classGenerationModel)
-	{
-		final InputStream is = ClassExtensions.getResourceAsStream(classGenerationModel);
-		final String xml = ReadFileExtensions.inputStream2String(is);
-		final ClassGenerationModel generationData = XmlExtensions.toObjectWithXStream(xml);
-		return generationData;
-	}
-
-
-	/**
-	 * Load class generation model.
-	 *
-	 * @param pomGenerationBean
-	 *            the pom generation bean
-	 * @return the class generation model
-	 */
-	public static PomGenerationBean loadPomGenerationModel(final String pomGenerationBean)
-	{
-		final InputStream is = ClassExtensions.getResourceAsStream(pomGenerationBean);
-		final String xml = ReadFileExtensions.inputStream2String(is);
-		final PomGenerationBean generationData = XmlExtensions.toObjectWithXStream(xml);
-		return generationData;
-	}
-
-	/**
-	 * Reads the qualified entity class names from the entities in the specified package.
-	 *
-	 * @param generationData
-	 *            the generation data
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void initializeQualifiedModelClassNames(final ClassGenerationModel generationData)
-		throws Exception
-	{
-		final Set<String> qualifiedModelClassNames = PackageExtensions
-			.scanClassNames(generationData.getModelPackageName());
-		generationData.setQualifiedModelClassNames(qualifiedModelClassNames);
-	}
-
-	/**
-	 * Generate pom files.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void generatePomFiles() throws Exception
-	{
-		final String pomGenerationModel = "PomGenerationModel.xml";
-
-		final PomGenerationBean generationData = loadPomGenerationModel(pomGenerationModel);
-		final VelocityContext context = new VelocityContext();
-		context.put("model", generationData);
-
-		final Template businessPomTemplate = Velocity.getTemplate(generationData.getBusinessPom());
-
-		final String businessPomClassPath = generationData.getParentName() + "/"
-			+ generationData.getParentName() + "-business" + "/" + "pom.xml";
-		final File f = new File(businessPomClassPath);
-		CreateFileExtensions.newFileQuietly(f);
-		final BufferedWriter writer = new BufferedWriter(new FileWriter(businessPomClassPath));
-
-		businessPomTemplate.merge(context, writer);
-		writer.flush();
-		writer.close();
-
-
-	}
-
-	/**
 	 * Generate classes.
 	 *
 	 * @param generator
@@ -212,19 +99,51 @@ public class GeneratorExtensions
 	}
 
 
-	private static void mergeToContext(final VelocityContext context, String templateFileName, String className) throws IOException
+	/**
+	 * Generate pom files.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static void generatePomFiles() throws Exception
 	{
-		File generatedClassFile;
-		generatedClassFile = new File(className);
-		CreateFileExtensions.newFileQuietly(generatedClassFile);
-		final BufferedWriter domainServiceInterfaceWriter = new BufferedWriter(
-			new FileWriter(className));
+		final String pomGenerationModel = "PomGenerationModel.xml";
 
-		final Template domainServiceInterfaceTemplate = Velocity
-			.getTemplate(templateFileName);
-		domainServiceInterfaceTemplate.merge(context, domainServiceInterfaceWriter);
-		domainServiceInterfaceWriter.flush();
-		domainServiceInterfaceWriter.close();
+		final PomGenerationBean generationData = loadPomGenerationModel(pomGenerationModel);
+		final VelocityContext context = new VelocityContext();
+		context.put("model", generationData);
+
+		final String businessPomClassPath = generationData.getParentName() + "/"
+			+ generationData.getParentName() + "-business" + "/" + "pom.xml";
+
+		mergeToContext(context, generationData.getBusinessPom(), businessPomClassPath);
+
+	}
+
+	/**
+	 * Generate dao classes.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static void generateRepositoryClasses() throws Exception
+	{
+		final String classGenerationModel = "ClassGenerationModel.xml";
+
+		final ClassGenerationModel generationData = loadClassGenerationModel(classGenerationModel);
+
+		initializeQualifiedModelClassNames(generationData);
+
+		final List<RepositoryClassModel> repositoryModels = getRepositoryClassModels(
+			generationData);
+
+		generateClasses(generationData, repositoryModels);
+
+	}
+
+	public static void getPomGenerationModel(final PomGenerationBean generator)
+	{
+
 	}
 
 	/**
@@ -299,9 +218,80 @@ public class GeneratorExtensions
 		return repositoryModels;
 	}
 
-	public static void getPomGenerationModel(final PomGenerationBean generator)
-	{
 
+	/**
+	 * Reads the qualified entity class names from the entities in the specified package.
+	 *
+	 * @param generationData
+	 *            the generation data
+	 * @throws Exception
+	 *             the exception
+	 */
+	public static void initializeQualifiedModelClassNames(final ClassGenerationModel generationData)
+		throws Exception
+	{
+		final Set<String> qualifiedModelClassNames = PackageExtensions
+			.scanClassNames(generationData.getModelPackageName());
+		generationData.setQualifiedModelClassNames(qualifiedModelClassNames);
+	}
+
+	/**
+	 * Load class generation model.
+	 *
+	 * @param classGenerationModel
+	 *            the class generation model
+	 * @return the class generation model
+	 */
+	public static ClassGenerationModel loadClassGenerationModel(final String classGenerationModel)
+	{
+		final InputStream is = ClassExtensions.getResourceAsStream(classGenerationModel);
+		final String xml = ReadFileExtensions.inputStream2String(is);
+		final ClassGenerationModel generationData = XmlExtensions.toObjectWithXStream(xml);
+		return generationData;
+	}
+
+	/**
+	 * Load class generation model.
+	 *
+	 * @param pomGenerationBean
+	 *            the pom generation bean
+	 * @return the class generation model
+	 */
+	public static PomGenerationBean loadPomGenerationModel(final String pomGenerationBean)
+	{
+		final InputStream is = ClassExtensions.getResourceAsStream(pomGenerationBean);
+		final String xml = ReadFileExtensions.inputStream2String(is);
+		final PomGenerationBean generationData = XmlExtensions.toObjectWithXStream(xml);
+		return generationData;
+	}
+
+	/**
+	 * Merge to context.
+	 *
+	 * @param context
+	 *            the context
+	 * @param templateFileName
+	 *            the template file name
+	 * @param className
+	 *            the class name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @deprecated use instead the same name method from velocity extensions.
+	 */
+	@Deprecated
+	private static void mergeToContext(final VelocityContext context, final String templateFileName, final String className) throws IOException
+	{
+		File generatedClassFile;
+		generatedClassFile = new File(className);
+		CreateFileExtensions.newFileQuietly(generatedClassFile);
+		final BufferedWriter domainServiceInterfaceWriter = new BufferedWriter(
+			new FileWriter(className));
+
+		final Template domainServiceInterfaceTemplate = Velocity
+			.getTemplate(templateFileName);
+		domainServiceInterfaceTemplate.merge(context, domainServiceInterfaceWriter);
+		domainServiceInterfaceWriter.flush();
+		domainServiceInterfaceWriter.close();
 	}
 
 }

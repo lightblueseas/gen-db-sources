@@ -70,7 +70,7 @@ public class GeneratorExtensions
 			// Velocity Template for the business services intefaces...
 			final String businessProjectPath = getBusinessProjectPath(pomGenerationData);
 			final String serviceInterfaceClassPath = generator.getSrcFolder()
-				+ generator.getSrcServiceGenerationPackage() + model.getServiceClassName()
+				+ generator.getSrcServiceGenerationPackage() + "/api/" + model.getServiceClassName()
 				+ FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getServiceInterfaceTemplateFile(), businessProjectPath + "/" + serviceInterfaceClassPath);
 
@@ -79,7 +79,8 @@ public class GeneratorExtensions
 				  generator.getSrcFolder()
 				+ generator.getSrcServiceGenerationPackage()
 				+ model.getModelClassName()
-				+ "Business" + FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
+				+ "Business"
+				+ FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getServiceClassTemplateFile(), businessProjectPath + "/" + serviceClassPath);
 
 			// Velocity Template for the domain object...
@@ -98,9 +99,20 @@ public class GeneratorExtensions
 
 			// Velocity Template for the domain services intefaces...
 			final String domainServiceInterfaceClassPath = generator.getSrcFolder()
-				+ generator.getSrcDomainServiceGenerationPackage() + model.getDomainServiceClassName()
+				+ generator.getSrcDomainServiceGenerationPackage()
+				+ "/api/"
+				+ model.getDomainServiceClassName()
 				+ FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getDomainServiceInterfaceTemplateFile(), domainProjectPath + "/" + domainServiceInterfaceClassPath);
+
+			// Velocity Template for the domain services classes...
+			final String domainServiceClassPath = generator.getSrcFolder()
+				+ generator.getSrcDomainServiceGenerationPackage()
+				+ model.getDomainClassName()
+				+ "Domain"
+				+ FileSuffix.SERVICE
+				+ FileExtension.JAVA.getExtension();
+			mergeToContext(context, generator.getDomainServiceClassTemplateFile(), domainProjectPath + "/" + domainServiceClassPath);
 		}
 	}
 

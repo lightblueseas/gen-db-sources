@@ -1,4 +1,4 @@
-package ${model.servicePackageName};
+package ${model.servicePackageName}.api;
 
 import $model.modelQuilifiedClassName;
 import de.alpharogroup.db.service.api.BusinessService;

@@ -61,16 +61,18 @@ public class GeneratorExtensions
 			mergeToContext(context, generator.getRepositoryClassTemplateFile(), entitiesProjectPath + "/" + repositoryClassPath);
 
 			// Velocity Template for the repository unit test classes...
+			final String initProjectPath = getInitProjectPath(pomGenerationData);
 			final String repositoryTestClassPath = generator.getSrcTestFolder()
 				+ generator.getSrcTestGenerationPackage() + model.getRepositoryClassName()
 				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getRepositoryTestClassTemplateFile(), repositoryTestClassPath);
+			mergeToContext(context, generator.getRepositoryTestClassTemplateFile(), initProjectPath + "/" + repositoryTestClassPath);
 
 			// Velocity Template for the business services intefaces...
+			final String businessProjectPath = getBusinessProjectPath(pomGenerationData);
 			final String serviceInterfaceClassPath = generator.getSrcFolder()
 				+ generator.getSrcServiceGenerationPackage() + model.getServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getServiceInterfaceTemplateFile(), serviceInterfaceClassPath);
+			mergeToContext(context, generator.getServiceInterfaceTemplateFile(), businessProjectPath + "/" + serviceInterfaceClassPath);
 
 			// Velocity Template for the business services classes...
 			final String serviceClassPath =
@@ -78,26 +80,27 @@ public class GeneratorExtensions
 				+ generator.getSrcServiceGenerationPackage()
 				+ model.getModelClassName()
 				+ "Business" + FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getServiceClassTemplateFile(), serviceClassPath);
+			mergeToContext(context, generator.getServiceClassTemplateFile(), businessProjectPath + "/" + serviceClassPath);
 
 			// Velocity Template for the domain object...
+			final String domainProjectPath = getDomainProjectPath(pomGenerationData);
 			final String domainClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainGenerationPackage() + model.getDomainClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getDomainClassTemplateFile(), domainClassPath);
+			mergeToContext(context, generator.getDomainClassTemplateFile(), domainProjectPath + "/" + domainClassPath);
 
 			// Velocity Template for the domain mapper object...
 			final String domainMapperClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainMapperGenerationPackage() + model.getModelClassName()
 				+ "Mapper"
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getDomainMapperClassTemplateFile(), domainMapperClassPath);
+			mergeToContext(context, generator.getDomainMapperClassTemplateFile(), domainProjectPath + "/" + domainMapperClassPath);
 
 			// Velocity Template for the domain services intefaces...
 			final String domainServiceInterfaceClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainServiceGenerationPackage() + model.getDomainServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getDomainServiceInterfaceTemplateFile(), domainServiceInterfaceClassPath);
+			mergeToContext(context, generator.getDomainServiceInterfaceTemplateFile(), domainProjectPath + "/" + domainServiceInterfaceClassPath);
 		}
 	}
 

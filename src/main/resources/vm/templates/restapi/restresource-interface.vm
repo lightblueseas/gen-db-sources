@@ -1,0 +1,29 @@
+package ${model.basePackageName}.rest.api;
+
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import de.alpharogroup.service.rs.RestfulResource;
+
+import ${model.domainPackageName}.${model.domainClassName};
+
+/**
+ * The interface {@link ${model.modelClassName}Resource} provides rest methods.
+ */
+@Path("/${model.modelClassName}/")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public interface ${model.modelClassName}Resource extends RestfulResource<$model.primaryKeyClassName, ${model.domainClassName}>
+{
+
+}

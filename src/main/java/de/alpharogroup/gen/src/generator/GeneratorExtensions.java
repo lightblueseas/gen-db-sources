@@ -35,6 +35,10 @@ public class GeneratorExtensions
 
 	private static final String POM_XML_FILENAME = "pom.xml";
 
+	private static ClassGenerationModelBean classGenerationData;
+
+	private static PomGenerationBean pomGenerationData;
+
 	/**
 	 * Generate classes.
 	 *
@@ -66,6 +70,13 @@ public class GeneratorExtensions
 				+ generator.getSrcTestGenerationPackage() + model.getRepositoryClassName()
 				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getRepositoryTestClassTemplateFile(), initProjectPath + "/" + repositoryTestClassPath);
+//
+//			// Velocity Template for the InitializeDatabase class...
+//			final String initDbClassPath = generator.getSrcFolder()
+//				+ "de/alpharogroup/db/init/"
+//				+ "InitializeDatabase"
+//				+ FileExtension.JAVA.getExtension();
+//			mergeToContext(context, generator.getInitInitDbClassTemplateFile(), initProjectPath + "/" + initDbClassPath);
 
 			// Velocity Template for the business services intefaces...
 			final String businessProjectPath = getBusinessProjectPath(pomGenerationData);
@@ -179,6 +190,21 @@ public class GeneratorExtensions
 
 		mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
 
+		// Velocity Template for the InitializeDatabase class...
+		final String initDbClassPath = getClassGenerationModelBean().getSrcFolder()
+			+ "de/alpharogroup/db/init/"
+			+ "InitializeDatabase"
+			+ FileExtension.JAVA.getExtension();
+		mergeToContext(context, getClassGenerationModelBean().getInitInitDbClassTemplateFile(), initProjectPath + "/" + initDbClassPath);
+		final String basePackageName = getClassGenerationModelBean().getBasePackageName().replace(".", "/")+"/";
+
+		// Velocity Template for the DatabaseInitialization class...
+		final String dbInitClassPath = getClassGenerationModelBean().getSrcFolder()
+			+ basePackageName
+			+ "DatabaseInitialization"
+			+ FileExtension.JAVA.getExtension();
+		mergeToContext(context, getClassGenerationModelBean().getInitDbInitClassTemplateFile(), initProjectPath + "/" + dbInitClassPath);
+
 	}
 
 	/**
@@ -189,19 +215,12 @@ public class GeneratorExtensions
 	 */
 	public static void generateRepositoryClasses() throws Exception
 	{
-		final String classGenerationModel = "ClassGenerationModel.xml";
-		final String pomGenerationModel = "PomGenerationModel.xml";
-
-		final PomGenerationBean pomGenerationData = loadPomGenerationModel(pomGenerationModel);
-
-		final ClassGenerationModelBean classGenerationData = loadClassGenerationModel(classGenerationModel);
-
-		initializeQualifiedModelClassNames(classGenerationData);
+		initializeQualifiedModelClassNames(getClassGenerationModelBean());
 
 		final List<RepositoryClassModel> repositoryModels = getRepositoryClassModels(
-			classGenerationData);
+			getClassGenerationModelBean());
 
-		generateClasses(classGenerationData, repositoryModels, pomGenerationData);
+		generateClasses(getClassGenerationModelBean(), repositoryModels, getPomGenerationBean());
 
 	}
 
@@ -212,6 +231,15 @@ public class GeneratorExtensions
 		return businessPomClassPath;
 	}
 
+	private static ClassGenerationModelBean getClassGenerationModelBean() {
+		if(classGenerationData == null) {
+			final String classGenerationModel = "ClassGenerationModel.xml";
+			classGenerationData = loadClassGenerationModel(classGenerationModel);
+		}
+		return classGenerationData;
+	}
+
+
 
 	private static String getDomainProjectPath(final PomGenerationBean generationData)
 	{
@@ -219,6 +247,7 @@ public class GeneratorExtensions
 			+ generationData.getParentName() + "-domain" ;
 		return domainPomClassPath;
 	}
+
 
 	private static String getEntitiesProjectPath(final PomGenerationBean generationData)
 	{
@@ -238,6 +267,14 @@ public class GeneratorExtensions
 	{
 		final String domainPomClassPath = generationData.getParentName();
 		return domainPomClassPath;
+	}
+
+	private static PomGenerationBean getPomGenerationBean() {
+		if(pomGenerationData == null) {
+			final String pomGenerationModel = "PomGenerationModel.xml";
+			pomGenerationData = loadPomGenerationModel(pomGenerationModel);
+		}
+		return pomGenerationData;
 	}
 
 	public static void getPomGenerationModel(final PomGenerationBean generator)

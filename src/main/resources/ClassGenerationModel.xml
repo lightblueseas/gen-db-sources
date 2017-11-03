@@ -23,5 +23,9 @@
 	<domainClassTemplateFile>src/main/resources/vm/templates/jpa/domain-object.vm</domainClassTemplateFile>		
 	<domainMapperClassTemplateFile>src/main/resources/vm/templates/jpa/domain-mapper.vm</domainMapperClassTemplateFile>	
 	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
-	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>		
+	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>	
+	
+	<initDbInitClassTemplateFile>src/main/resources/vm/templates/init/DatabaseInitialization.vm</initDbInitClassTemplateFile>
+	<initInitDbClassTemplateFile>src/main/resources/vm/templates/init/InitializeDatabase.vm</initInitDbClassTemplateFile>		
+	
 </de.alpharogroup.gen.src.model.ClassGenerationModelBean>

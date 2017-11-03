@@ -46,5 +46,7 @@ public class ClassGenerationModelBean {
     private String businessPom;
     private String dataPom;
     private String domainClassTemplateFile;
+    private String initDbInitClassTemplateFile;
+    private String initInitDbClassTemplateFile;
 
 }

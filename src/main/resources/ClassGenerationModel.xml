@@ -16,14 +16,14 @@
 	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>
 	<srcDomainMapperGenerationPackage>de/alpharogroup/questionaries/system/mapper/</srcDomainMapperGenerationPackage>
 	<srcDomainServiceGenerationPackage>de/alpharogroup/questionaries/system/domain/service/</srcDomainServiceGenerationPackage>
-	<repositoryClassTemplateFile>src/main/resources/vm/templates/jpa/repository.vm</repositoryClassTemplateFile>
-	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/jpa/repositoryTest.vm</repositoryTestClassTemplateFile>
-	<serviceClassTemplateFile>src/main/resources/vm/templates/jpa/service.vm</serviceClassTemplateFile>
-	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/serviceinterface.vm</serviceInterfaceTemplateFile>	
-	<domainClassTemplateFile>src/main/resources/vm/templates/jpa/domain-object.vm</domainClassTemplateFile>		
-	<domainMapperClassTemplateFile>src/main/resources/vm/templates/jpa/domain-mapper.vm</domainMapperClassTemplateFile>	
-	<domainServiceClassTemplateFile>src/main/resources/vm/templates/jpa/domainService.vm</domainServiceClassTemplateFile>
-	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/jpa/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>	
+	<repositoryClassTemplateFile>src/main/resources/vm/templates/entities/repository.vm</repositoryClassTemplateFile>
+	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/init/repositoryTest.vm</repositoryTestClassTemplateFile>
+	<serviceClassTemplateFile>src/main/resources/vm/templates/business/service.vm</serviceClassTemplateFile>
+	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/business/serviceinterface.vm</serviceInterfaceTemplateFile>	
+	<domainClassTemplateFile>src/main/resources/vm/templates/domain/domain-object.vm</domainClassTemplateFile>		
+	<domainMapperClassTemplateFile>src/main/resources/vm/templates/domain/domain-mapper.vm</domainMapperClassTemplateFile>	
+	<domainServiceClassTemplateFile>src/main/resources/vm/templates/domain/domainService.vm</domainServiceClassTemplateFile>
+	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/domain/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>	
 	
 	<initDbInitClassTemplateFile>src/main/resources/vm/templates/init/DatabaseInitialization.vm</initDbInitClassTemplateFile>
 	<initInitDbClassTemplateFile>src/main/resources/vm/templates/init/InitializeDatabase.vm</initInitDbClassTemplateFile>		

@@ -1,0 +1,26 @@
+package $model.servicePackageName;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import $model.modelQuilifiedClassName;
+import ${model.servicePackageName}.${model.modelClassName}Service;
+
+/**
+ * The unit test class for the service class {@link ${model.modelClassName}BusinessService}.
+ */
+@ContextConfiguration(locations = "classpath:test-applicationContext.xml")
+public class ${model.modelClassName}BusinessServiceTest 
+	extends
+		AbstractTestNGSpringContextTests
+{
+
+}

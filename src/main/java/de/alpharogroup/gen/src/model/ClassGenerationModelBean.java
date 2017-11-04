@@ -20,6 +20,7 @@ import lombok.ToString;
 public class ClassGenerationModelBean {
 
     private Set<String> qualifiedModelClassNames;
+    /** the package names have the suffix:'PackageName' */
     private String basePackageName;
     private String modelPackageName;
     private String domainPackageName;
@@ -27,26 +28,30 @@ public class ClassGenerationModelBean {
     private String servicePackageName;
     private String domainServicePackageName;
     private String domainMapperPackageName;
+    /** SOURCE FOLDERS have the prefix 'src'. */
     private String srcFolder;
     private String srcTestFolder;
+    /** SOURCE GENERATION PACKAGE NAMES have the prefix 'scr' and the suffix 'GenerationPackage'. */
     private String srcGenerationPackage;
     private String srcTestGenerationPackage;
-    private String templateDir;
-    private String repositoryClassTemplateFile;
-    private String serviceClassTemplateFile;
-    private String serviceInterfaceTemplateFile;
-    private String domainServiceClassTemplateFile;
-    private String domainServiceInterfaceTemplateFile;
-    private String domainMapperClassTemplateFile;
     private String srcServiceGenerationPackage;
     private String srcDomainServiceGenerationPackage;
     private String srcDomainGenerationPackage;
     private String srcDomainMapperGenerationPackage;
-    private String repositoryTestClassTemplateFile;
-    private String businessPom;
-    private String dataPom;
-    private String domainClassTemplateFile;
-    private String initDbInitClassTemplateFile;
-    private String initInitDbClassTemplateFile;
+    private String templateDir; // ???
+    /** TEMPLATE FILES have the prefix 'tmpl'. */
+    private String tmplGitignore;
+    private String tmplRepositoryClass;
+    private String tmplRepositoryTestClass;
+    private String tmplServiceClass;
+    private String tmplServiceInterface;
+    private String tmplDomainClass;
+    private String tmplDomainServiceClass;
+    private String tmplDomainServiceInterface;
+    private String tmplDomainMapperClass;
+//    private String businessPom;
+//    private String dataPom;
+    private String tmplInitDbInitClass;
+    private String tmplInitInitDbClass;
 
 }

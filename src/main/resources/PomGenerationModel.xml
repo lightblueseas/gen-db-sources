@@ -4,8 +4,9 @@
 	<dataProjectVersion>1.0.0</dataProjectVersion>
 	<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
 	<persistenceunitName>quiz</persistenceunitName>
+	<!-- TEMPLATE FILES -->
+	<dataPom>src/main/resources/vm/templates/data-project-pom.vm</dataPom>
 	<businessPom>src/main/resources/vm/templates/business/business-pom.vm</businessPom>
-	<dataPom>src/main/resources/vm/templates/data-project-pom.vm</dataPom>	
 	<domainPom>src/main/resources/vm/templates/domain/domain-pom.vm</domainPom>	
 	<entitiesPom>src/main/resources/vm/templates/entities/entities-pom.vm</entitiesPom>	
 	<initPom>src/main/resources/vm/templates/init/init-pom.vm</initPom>	

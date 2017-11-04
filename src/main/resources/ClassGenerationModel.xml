@@ -1,5 +1,6 @@
 <de.alpharogroup.gen.src.model.ClassGenerationModelBean>
 	<qualifiedModelClassNames class="linked-hash-set"/>
+	<!-- PACKAGE NAMES -->
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
 	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
 	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
@@ -7,25 +8,28 @@
 	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
 	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
 	<domainServicePackageName>de.alpharogroup.questionaries.system.domain.service</domainServicePackageName>
+	<!-- SOURCE FOLDERS -->
 	<srcFolder>src/main/java/</srcFolder>
 	<srcTestFolder>src/test/java/</srcTestFolder>
+	<templateDir>src/main/resources/</templateDir>
+	<!-- SOURCE GENERATION PACKAGE NAMES -->
 	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
 	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
-	<templateDir>src/main/resources/</templateDir>
 	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
 	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>
 	<srcDomainMapperGenerationPackage>de/alpharogroup/questionaries/system/mapper/</srcDomainMapperGenerationPackage>
 	<srcDomainServiceGenerationPackage>de/alpharogroup/questionaries/system/domain/service/</srcDomainServiceGenerationPackage>
-	<repositoryClassTemplateFile>src/main/resources/vm/templates/entities/repository.vm</repositoryClassTemplateFile>
-	<repositoryTestClassTemplateFile>src/main/resources/vm/templates/init/repositoryTest.vm</repositoryTestClassTemplateFile>
-	<serviceClassTemplateFile>src/main/resources/vm/templates/business/service.vm</serviceClassTemplateFile>
-	<serviceInterfaceTemplateFile>src/main/resources/vm/templates/business/serviceinterface.vm</serviceInterfaceTemplateFile>	
-	<domainClassTemplateFile>src/main/resources/vm/templates/domain/domain-object.vm</domainClassTemplateFile>		
-	<domainMapperClassTemplateFile>src/main/resources/vm/templates/domain/domain-mapper.vm</domainMapperClassTemplateFile>	
-	<domainServiceClassTemplateFile>src/main/resources/vm/templates/domain/domainService.vm</domainServiceClassTemplateFile>
-	<domainServiceInterfaceTemplateFile>src/main/resources/vm/templates/domain/domainServiceinterface.vm</domainServiceInterfaceTemplateFile>	
-	
-	<initDbInitClassTemplateFile>src/main/resources/vm/templates/init/DatabaseInitialization.vm</initDbInitClassTemplateFile>
-	<initInitDbClassTemplateFile>src/main/resources/vm/templates/init/InitializeDatabase.vm</initInitDbClassTemplateFile>		
+	<!-- TEMPLATE FILES -->
+	<tmplGitignore>src/main/resources/vm/templates/gitignore.vm</tmplGitignore>
+	<tmplRepositoryClass>src/main/resources/vm/templates/entities/repository.vm</tmplRepositoryClass>
+	<tmplRepositoryTestClass>src/main/resources/vm/templates/init/repositoryTest.vm</tmplRepositoryTestClass>
+	<tmplServiceClass>src/main/resources/vm/templates/business/service.vm</tmplServiceClass>
+	<tmplServiceInterface>src/main/resources/vm/templates/business/serviceinterface.vm</tmplServiceInterface>	
+	<tmplDomainClass>src/main/resources/vm/templates/domain/domain-object.vm</tmplDomainClass>		
+	<tmplDomainMapperClass>src/main/resources/vm/templates/domain/domain-mapper.vm</tmplDomainMapperClass>	
+	<tmplDomainServiceClass>src/main/resources/vm/templates/domain/domainService.vm</tmplDomainServiceClass>
+	<tmplDomainServiceInterface>src/main/resources/vm/templates/domain/domainServiceinterface.vm</tmplDomainServiceInterface>	
+	<tmplInitDbInitClass>src/main/resources/vm/templates/init/DatabaseInitialization.vm</tmplInitDbInitClass>
+	<tmplInitInitDbClass>src/main/resources/vm/templates/init/InitializeDatabase.vm</tmplInitInitDbClass>		
 	
 </de.alpharogroup.gen.src.model.ClassGenerationModelBean>

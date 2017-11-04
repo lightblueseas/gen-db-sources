@@ -17,6 +17,7 @@ import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FileSuffix;
 import de.alpharogroup.file.create.CreateFileExtensions;
 import de.alpharogroup.file.read.ReadFileExtensions;
+import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.gen.src.model.ClassGenerationModelBean;
 import de.alpharogroup.gen.src.model.PomGenerationBean;
 import de.alpharogroup.gen.src.model.RepositoryClassModel;
@@ -37,6 +38,7 @@ public class GeneratorExtensions
 
 	private static final String POM_XML_FILENAME = "pom.xml";
 	private static final String GITIGNORE_FILENAME = ".gitignore";
+	private static final String LOG4J_PROPERTIES_FILENAME = "log4j.properties";
 
 	private static ClassGenerationModelBean classGenerationData;
 
@@ -89,6 +91,16 @@ public class GeneratorExtensions
 				+ "Business"
 				+ FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
 			mergeToContext(context, generator.getTmplServiceClass(), businessProjectPath + "/" + serviceClassPath);
+
+			// Velocity Template for the business services unit test classes...
+			final String serviceTestClassPath =
+				  generator.getSrcTestFolder()
+				+ generator.getSrcServiceGenerationPackage()
+				+ model.getModelClassName()
+				+ "Business"
+				+ FileSuffix.TEST
+				+ FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
+			mergeToContext(context, generator.getTmplServiceTestClass(), initProjectPath + "/" + serviceTestClassPath);
 
 			// Velocity Template for the domain object...
 			final String domainProjectPath = getDomainProjectPath(pomGenerationData);
@@ -171,10 +183,20 @@ public class GeneratorExtensions
 
 		// Generate init pom.xml
 		final String initProjectPath = getInitProjectPath(generationData);
+		final String initSrcMainResourcesPath = initProjectPath + "/" + PathFinder.SOURCE_FOLDER_SRC_MAIN_RESOURCES;
+		final String initSrcTestResourcesPath = initProjectPath + "/" + PathFinder.SOURCE_FOLDER_SRC_TEST_RESOURCES;
 		final String initPomClassPath = initProjectPath + "/" + POM_XML_FILENAME;
 
 		mergeToContext(context, generationData.getInitPom(), initPomClassPath);
 		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), initProjectPath + "/" + GITIGNORE_FILENAME);
+		mergeToContext(context, getClassGenerationModelBean().getTmplLog4jProperties(), initSrcMainResourcesPath+ "/" + LOG4J_PROPERTIES_FILENAME);
+		mergeToContext(context, getClassGenerationModelBean().getTmplH2ApplicationContextXml(),initSrcTestResourcesPath + "/" + "test-h2-applicationContext.xml");
+		mergeToContext(context, getClassGenerationModelBean().getTmplApplicationContextXml(), initSrcTestResourcesPath + "/" + "test-applicationContext.xml");
+		mergeToContext(context, getClassGenerationModelBean().getTmplTestNgXml(), initSrcTestResourcesPath + "/" + "testng.xml");
+		mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceH2Xml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence-h2.xml");
+		mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceXml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence.xml");
+		mergeToContext(context, getClassGenerationModelBean().getTmplJdbcH2Properties(), initSrcMainResourcesPath+ "/" + "jdbc-h2.properties");
+		mergeToContext(context, getClassGenerationModelBean().getTmplJdbcProperties(), initSrcMainResourcesPath+ "/" + "jdbc.properties");
 
 		// Generate rest-api pom.xml
 		final String restApiProjectPath = getRestApiProjectPath(generationData);

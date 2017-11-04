@@ -41,17 +41,38 @@ public class ClassGenerationModelBean {
     private String templateDir; // ???
     /** TEMPLATE FILES have the prefix 'tmpl'. */
     private String tmplGitignore;
+    private String tmplLog4jProperties;
     private String tmplRepositoryClass;
-    private String tmplRepositoryTestClass;
     private String tmplServiceClass;
     private String tmplServiceInterface;
     private String tmplDomainClass;
+    private String tmplDomainMapperClass;
     private String tmplDomainServiceClass;
     private String tmplDomainServiceInterface;
-    private String tmplDomainMapperClass;
 //    private String businessPom;
 //    private String dataPom;
     private String tmplInitDbInitClass;
     private String tmplInitInitDbClass;
+    private String tmplJdbcH2Properties;
+    private String tmplJdbcProperties;
+    private String tmplPersistenceH2Xml;
+    private String tmplPersistenceXml;
+    private String tmplRepositoryTestClass;
+    private String tmplServiceH2TestClass;
+    private String tmplServiceTestClass;
+    private String tmplApplicationContextXml;
+    private String tmplH2ApplicationContextXml;
+    private String tmplTestNgXml;
+    private String tmplRestResourceClass;
+    private String tmplRestResourceInterface;
+    private String tmplRestClientClass;
+    private String tmplRestClientTestClass;
+    private String tmplJettyRunnerClass;
+    private String tmplDataApplicationContextXml;
+    private String tmplIndexJsp;
+    private String tmplManifestMf;
+    private String tmplProjectProperties;
+    private String tmplWebApplicationContextXml;
+    private String tmplWebXml;
 
 }

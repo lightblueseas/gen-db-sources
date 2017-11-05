@@ -141,7 +141,7 @@ public class GeneratorExtensions
 				+ FileExtension.JAVA.getExtension();
 			mergeProjectFile(context, generator.getTmplRestResourceClass(), getRestApiProjectPath(pomGenerationData), restapiResourceClassPath, withProjectPath);
 
-			// Velocity Template for the rest-client class...
+			// Velocity Template for the rest-client classes...
 			final String restClientClassPath = generator.getSrcFolder()
 				+ generator.getSrcRestGenerationPackage()
 				+ "/client/"
@@ -149,6 +149,16 @@ public class GeneratorExtensions
 				+ FileSuffix.REST_CLIENT
 				+ FileExtension.JAVA.getExtension();
 			mergeProjectFile(context, generator.getTmplRestClientClass(), getRestClientProjectPath(pomGenerationData), restClientClassPath, withProjectPath);
+
+			// Velocity Template for the rest-client unit test classes...
+			final String restClientTestClassPath = generator.getSrcTestFolder()
+				+ generator.getSrcRestGenerationPackage()
+				+ "/client/"
+				+ model.getModelClassName()
+				+ FileSuffix.REST_CLIENT
+				+ FileSuffix.TEST
+				+ FileExtension.JAVA.getExtension();
+			mergeProjectFile(context, generator.getTmplRestClientTestClass(), getRestClientProjectPath(pomGenerationData), restClientTestClassPath, withProjectPath);
 		}
 	}
 

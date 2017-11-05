@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ${model.repositoryPackageName}.${model.repositoryClassName};
 import $model.modelQuilifiedClassName;
-import ${model.servicePackageName}.${model.modelClassName}Service;
+import ${model.servicePackageName}.api.${model.modelClassName}Service;
 
 /**
  * The service class {@link ${model.modelClassName}BusinessService}.

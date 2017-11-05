@@ -4,7 +4,7 @@
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
 	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
 	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
-	<domainMapperPackageName>de.alpharogroup.questionaries.system.domain.mapper</domainMapperPackageName>
+	<domainMapperPackageName>de.alpharogroup.questionaries.system.mapper</domainMapperPackageName>
 	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
 	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
 	<domainServicePackageName>de.alpharogroup.questionaries.system.domain.service</domainServicePackageName>

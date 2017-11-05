@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import $model.modelQuilifiedClassName;
-import ${model.servicePackageName}.${model.modelClassName}Service;
+import ${model.servicePackageName}.api.${model.modelClassName}Service;
 
 /**
  * The unit test class for the service class {@link ${model.modelClassName}BusinessService}.

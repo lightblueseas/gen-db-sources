@@ -358,6 +358,7 @@ public class GeneratorExtensions
 			model.setRepDomainServiceClassName(repDomainServiceClassName);
 			model.setDomainServiceClassName(domainServiceInterfaceName );
 			model.setDomainPackageName(generator.getDomainPackageName());
+			model.setDomainMapperPackageName(generator.getDomainMapperPackageName());
 
 		}
 		return repositoryModels;

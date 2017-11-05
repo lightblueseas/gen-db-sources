@@ -1,6 +1,6 @@
 package $model.domainServicePackageName;
 
-import de.alpharogroup.db.service.AbstractBusinessService;
+import de.alpharogroup.service.domain.AbstractDomainService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,16 +10,16 @@ import ${model.repositoryPackageName}.${model.repositoryClassName};
 import ${model.domainPackageName}.${model.domainClassName};
 import ${model.domainMapperPackageName}.${model.modelClassName}Mapper;
 import $model.modelQuilifiedClassName;
-import ${model.servicePackageName}.api.${model.domainClassName}Service;
+import ${model.domainServicePackageName}.api.${model.domainClassName}Service;
 
 /**
  * The service class {@link ${model.modelClassName}BusinessService}.
  */
 @Transactional
 @Service("${model.repDomainServiceClassName}")
-public class ${model.domainClassName}BusinessService 
+public class ${model.domainClassName}DomainService 
 	extends 
-		AbstractBusinessService<$model.primaryKeyClassName, ${model.domainClassName}, ${model.modelClassName}, ${model.repositoryClassName}, ${model.modelClassName}Mapper>	
+		AbstractDomainService<$model.primaryKeyClassName, ${model.domainClassName}, ${model.modelClassName}, ${model.repositoryClassName}, ${model.modelClassName}Mapper>	
 	implements 
 		${model.domainClassName}Service
 {

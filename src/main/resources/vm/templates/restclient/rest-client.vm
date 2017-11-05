@@ -16,7 +16,7 @@ public class ${model.modelClassName}RestClient extends AbstractRestClient
 	@Getter
 	private final ${model.modelClassName}Resource resource;
 
-	public ResourcesRestClient()
+	public ${model.modelClassName}RestClient()
 	{
 		this(DEFAULT_BASE_HTTP_URL);
 	}
@@ -27,7 +27,7 @@ public class ${model.modelClassName}RestClient extends AbstractRestClient
 	 * @param baseUrl
 	 *            the base url
 	 */
-	public ResourcesRestClient(final String baseUrl)
+	public ${model.modelClassName}RestClient(final String baseUrl)
 	{
 		super(baseUrl);
 		resource = newResource(${model.modelClassName}Resource.class);

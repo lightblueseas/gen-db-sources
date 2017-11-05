@@ -14,13 +14,14 @@
 	<!-- Enable annotation configuration -->
 	<context:annotation-config />
 	<!-- Scan sample packages for Spring annotations -->
-	<context:component-scan base-package="de.alpharogroup.resource.system.repositories" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.entities" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.mapper" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.service.api" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.service" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.rest" />
-	<context:component-scan base-package="de.alpharogroup.resource.system.rest.api" />
+	<context:component-scan base-package="$model.classGenerationModel.repositoryPackageName" />
+	<context:component-scan base-package="$model.classGenerationModel.modelPackageName" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.mapper" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service.api" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service.mapper" />	
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.rest" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.rest.api" />
 		
 	<bean id="propertyPlaceholder"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -77,7 +78,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 
-		<property name="persistenceUnitName" value="resourcesystem" />
+		<property name="persistenceUnitName" value="${model.persistenceunitName}" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
 	</bean>

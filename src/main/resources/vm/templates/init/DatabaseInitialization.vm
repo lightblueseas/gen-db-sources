@@ -1,4 +1,4 @@
-package de.alpharogroup.resource.system.db.init;
+package ${model.classGenerationModel.basePackageName}.db.init;
 
 import java.io.File;
 import java.util.ArrayList;

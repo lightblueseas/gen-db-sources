@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import de.alpharogroup.resource.system.db.init.DatabaseInitialization;
+import ${model.classGenerationModel.basePackageName}.db.init.DatabaseInitialization;
 import de.alpharogroup.resourcebundle.properties.PropertiesFileExtensions;
 
 /**

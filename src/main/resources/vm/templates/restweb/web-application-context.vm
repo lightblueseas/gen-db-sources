@@ -16,6 +16,7 @@
 
 	<jaxrs:server id="service" address="/">
 		<jaxrs:serviceBeans>
+			<!-- TODO set rest resources interface here with a loop -->
 			<ref bean="resourcesResource" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
@@ -24,6 +25,7 @@
 	</jaxrs:server>
 	
 	<!-- web resources -->
+	<!-- TODO set rest resources class interface here with a loop -->
 	<bean id="resourcesResource" class="de.alpharogroup.resource.system.rest.ResourcesRestResource">
 		<property name="domainService" ref="resourceDomainService"></property>
 	</bean>

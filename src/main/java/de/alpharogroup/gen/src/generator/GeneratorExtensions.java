@@ -30,6 +30,11 @@ import de.alpharogroup.xml.XmlExtensions;
 //@Slf4j
 public class GeneratorExtensions
 {
+	/**
+	 * The Constant SOURCE_FOLDER_SRC_MAIN_RESOURCES keeps the relative path for the source folder
+	 * 'src/main/resources' in maven projects.
+	 */
+	public static final String SOURCE_FOLDER_SRC_MAIN_WEBAPP = "src/main/webapp";
 
 	private static final String DATABASE_INITIALIZATION_CLASSNAME = "DatabaseInitialization";
 	private static final String INITIALIZE_DATABASE_CLASSNAME = "InitializeDatabase";
@@ -237,25 +242,51 @@ public class GeneratorExtensions
 
 		// Generate rest-web pom.xml
 		final String restWebProjectPath = getRestWebProjectPath(generationData);
+		final String restWebSrcMainResourcesPath = restWebProjectPath + "/" + PathFinder.SOURCE_FOLDER_SRC_MAIN_RESOURCES;
+		final String restWebSrcMainWebappPath = restWebProjectPath + "/" + SOURCE_FOLDER_SRC_MAIN_WEBAPP;
 		final String restWebPomClassPath = restWebProjectPath + "/" + POM_XML_FILENAME;
 
 		VelocityExtensions.mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
 		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restWebProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplLog4jProperties(), restWebSrcMainResourcesPath+ "/" + LOG4J_PROPERTIES_FILENAME);
+
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceH2Xml(), restWebSrcMainResourcesPath+ "/META-INF/" + "persistence-h2.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceXml(), restWebSrcMainResourcesPath+ "/META-INF/" + "persistence.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplJdbcH2Properties(), restWebSrcMainResourcesPath+ "/" + "jdbc-h2.properties");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplJdbcProperties(), restWebSrcMainResourcesPath+ "/" + "jdbc.properties");
+
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplDataApplicationContextXml(), restWebSrcMainResourcesPath+ "/" + "data-application-context.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplIndexJsp(), restWebSrcMainWebappPath+ "/" + "index.jsp");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplManifestMf(), restWebSrcMainWebappPath+ "/META-INF/" + "MANIFEST.MF");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplProjectProperties(), restWebSrcMainResourcesPath+ "/" + "project.properties");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplWebApplicationContextXml(), restWebSrcMainResourcesPath+ "/" + "web-application-context.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplWebXml(), restWebSrcMainWebappPath+ "/WEB-INF/" + "web.xml");
 
 		// Velocity Template for the InitializeDatabase class...
-		final String initDbClassPath = getClassGenerationModelBean().getSrcFolder()
+		final String initializeDatabaseClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ DB_INIT_PATH
 			+ INITIALIZE_DATABASE_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
-		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitInitDbClass(), initProjectPath + "/" + initDbClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitInitDbClass(), initProjectPath + "/" + initializeDatabaseClassPath);
 		final String basePackageName = getClassGenerationModelBean().getBasePackageName().replace(".", "/")+"/";
 
 		// Velocity Template for the DatabaseInitialization class...
-		final String dbInitClassPath = getClassGenerationModelBean().getSrcFolder()
+		final String databaseInitializationClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ basePackageName
 			+ DATABASE_INITIALIZATION_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
-		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitDbInitClass(), initProjectPath + "/" + dbInitClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitDbInitClass(), initProjectPath + "/" + databaseInitializationClassPath);
+
+
+
+		// Velocity Template for the InitializeDatabase class...
+		final String applicationJettyRunnerClassPath = getClassGenerationModelBean().getSrcTestFolder()
+			+ basePackageName
+			+ "ApplicationJettyRunner"
+			+ FileExtension.JAVA.getExtension();
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplJettyRunnerClass(), restWebProjectPath + "/" + applicationJettyRunnerClassPath);
+
+
 
 	}
 

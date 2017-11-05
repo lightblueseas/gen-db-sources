@@ -34,6 +34,8 @@ public class RepositoryClassModel implements Serializable
 
     private String domainMapperPackageName;
 
+    private String restPackageName;
+
 	private String modelQuilifiedClassName;
 
 	private String repSpringRefClassName;

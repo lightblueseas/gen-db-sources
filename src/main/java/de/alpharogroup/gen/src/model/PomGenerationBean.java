@@ -18,6 +18,9 @@ import lombok.ToString;
 public class PomGenerationBean
 {
 	private String parentName;
+	private String pw;
+
+	private ClassGenerationModelBean classGenerationModel;
 
 	private String dataProjectName;
 	private String dataProjectVersion;

@@ -1,4 +1,4 @@
-package ${model.basePackageName}.rest;
+package ${model.restPackageName};
 
 import javax.ws.rs.core.Response;
 
@@ -6,7 +6,7 @@ import ${model.domainPackageName}.${model.domainClassName};
 
 import ${model.domainServicePackageName}.api.${model.domainClassName}Service;
 
-import ${model.basePackageName}.rest.api.${model.modelClassName}Resource;
+import ${model.restPackageName}.api.${model.modelClassName}Resource;
 
 import de.alpharogroup.service.rs.AbstractRestfulResource;
 

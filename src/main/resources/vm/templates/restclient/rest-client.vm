@@ -1,31 +1,28 @@
-package de.alpharogroup.resource.system.rest.client;
+package ${model.restPackageName}.client;
 
 import de.alpharogroup.cxf.rest.client.AbstractRestClient;
-import de.alpharogroup.resource.system.rest.api.ResourcesResource;
+
+import ${model.restPackageName}.api.${model.modelClassName}Resource;
 import lombok.Getter;
 
 /**
- * The class {@link ResourcesRestClient}.
+ * The class {@link ${model.modelClassName}RestClient}.
  */
-public class ResourcesRestClient extends AbstractRestClient
+public class ${model.modelClassName}RestClient extends AbstractRestClient
 {
-
 	/**
-	 * The {@link ResourcesResource}.
+	 * The {@link ${model.modelClassName}Resource}.
 	 */
 	@Getter
-	private final ResourcesResource resourcesResource;
+	private final ${model.modelClassName}Resource resource;
 
-	/**
-	 * Instantiates a new {@link ResourcesRestClient} with the default base url.
-	 */
 	public ResourcesRestClient()
 	{
 		this(DEFAULT_BASE_HTTP_URL);
 	}
 
 	/**
-	 * Instantiates a new {@link ResourcesRestClient}.
+	 * Instantiates a new {@link ${model.modelClassName}RestClient}.
 	 *
 	 * @param baseUrl
 	 *            the base url
@@ -33,6 +30,6 @@ public class ResourcesRestClient extends AbstractRestClient
 	public ResourcesRestClient(final String baseUrl)
 	{
 		super(baseUrl);
-		resourcesResource = newResource(ResourcesResource.class);
+		resource = newResource(${model.modelClassName}Resource.class);
 	}
 }

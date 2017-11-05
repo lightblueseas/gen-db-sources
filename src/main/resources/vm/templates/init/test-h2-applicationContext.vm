@@ -15,12 +15,12 @@
 	<!-- Enable annotation configuration -->
 	<context:annotation-config />
 	<!-- Scan sample packages for Spring annotations -->
-	<context:component-scan base-package="$model.repositoryPackageName" />
-	<context:component-scan base-package="$model.modelPackageName" />
-	<context:component-scan base-package="${model.basePackageName}.mapper" />
-	<context:component-scan base-package="${model.basePackageName}.service.api" />
-	<context:component-scan base-package="${model.basePackageName}.service.mapper" />	
-	<context:component-scan base-package="${model.basePackageName}.service" />
+	<context:component-scan base-package="$model.classGenerationModel.repositoryPackageName" />
+	<context:component-scan base-package="$model.classGenerationModel.modelPackageName" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.mapper" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service.api" />
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service.mapper" />	
+	<context:component-scan base-package="${model.classGenerationModel.basePackageName}.service" />
 
 	<bean id="propertyPlaceholder"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

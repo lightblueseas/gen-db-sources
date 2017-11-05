@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.velocity.VelocityContext;
 
 import de.alpharogroup.file.FileExtension;
@@ -30,6 +31,9 @@ import de.alpharogroup.xml.XmlExtensions;
 public class GeneratorExtensions
 {
 
+	private static final String DATABASE_INITIALIZATION_CLASSNAME = "DatabaseInitialization";
+	private static final String INITIALIZE_DATABASE_CLASSNAME = "InitializeDatabase";
+	private static final String DB_INIT_PATH = "de/alpharogroup/db/init/";
 	private static final String API_PACKAGE_PATH = "/api/";
 	private static final String POM_XML_FILENAME = "pom.xml";
 	private static final String GITIGNORE_FILENAME = ".gitignore";
@@ -60,19 +64,19 @@ public class GeneratorExtensions
 			final String repositoryClassPath = generator.getSrcFolder()
 				+ generator.getSrcGenerationPackage() + model.getRepositoryClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplRepositoryClass(), getEntitiesProjectPath(pomGenerationData), repositoryClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplRepositoryClass(), getEntitiesProjectPath(pomGenerationData), repositoryClassPath, withProjectPath);
 
 			// Velocity Template for the repository unit test classes...
 			final String repositoryTestClassPath = generator.getSrcTestFolder()
 				+ generator.getSrcTestGenerationPackage() + model.getRepositoryClassName()
 				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplRepositoryTestClass(), getInitProjectPath(pomGenerationData), repositoryTestClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplRepositoryTestClass(), getInitProjectPath(pomGenerationData), repositoryTestClassPath, withProjectPath);
 
 			// Velocity Template for the business services intefaces...
 			final String serviceInterfacePath = generator.getSrcFolder()
 				+ generator.getSrcServiceGenerationPackage() + API_PACKAGE_PATH + model.getServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplServiceInterface(), getBusinessProjectPath(pomGenerationData), serviceInterfacePath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplServiceInterface(), getBusinessProjectPath(pomGenerationData), serviceInterfacePath, withProjectPath);
 
 			// Velocity Template for the business services classes...
 			final String serviceClassPath =
@@ -80,7 +84,7 @@ public class GeneratorExtensions
 				+ generator.getSrcServiceGenerationPackage()
 				+ model.getModelClassName()
 				+ FileSuffix.BUSINESS_SERVICE + FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplServiceClass(), getBusinessProjectPath(pomGenerationData), serviceClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplServiceClass(), getBusinessProjectPath(pomGenerationData), serviceClassPath, withProjectPath);
 
 			// Velocity Template for the business services unit test classes...
 			final String serviceTestClassPath =
@@ -89,20 +93,20 @@ public class GeneratorExtensions
 				+ model.getModelClassName()
 				+ FileSuffix.BUSINESS_SERVICE
 				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplServiceTestClass(), getInitProjectPath(pomGenerationData), serviceTestClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplServiceTestClass(), getInitProjectPath(pomGenerationData), serviceTestClassPath, withProjectPath);
 
 			// Velocity Template for the domain object...
 			final String domainClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainGenerationPackage() + model.getDomainClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplDomainClass(), getDomainProjectPath(pomGenerationData), domainClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplDomainClass(), getDomainProjectPath(pomGenerationData), domainClassPath, withProjectPath);
 
 			// Velocity Template for the domain mapper object...
 			final String domainMapperClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainMapperGenerationPackage() + model.getModelClassName()
 				+ FileSuffix.MAPPER
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplDomainMapperClass(), getDomainProjectPath(pomGenerationData), domainMapperClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplDomainMapperClass(), getDomainProjectPath(pomGenerationData), domainMapperClassPath, withProjectPath);
 
 			// Velocity Template for the domain services intefaces...
 			final String domainServiceInterfacePath = generator.getSrcFolder()
@@ -110,7 +114,7 @@ public class GeneratorExtensions
 				+ API_PACKAGE_PATH
 				+ model.getDomainServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplDomainServiceInterface(), getDomainProjectPath(pomGenerationData), domainServiceInterfacePath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplDomainServiceInterface(), getDomainProjectPath(pomGenerationData), domainServiceInterfacePath, withProjectPath);
 
 			// Velocity Template for the domain services classes...
 			final String domainServiceClassPath = generator.getSrcFolder()
@@ -118,7 +122,24 @@ public class GeneratorExtensions
 				+ model.getDomainClassName()
 				+ FileSuffix.DOMAIN_SERVICE
 				+ FileExtension.JAVA.getExtension();
-			mergeProjectFile(generator, context, generator.getTmplDomainServiceClass(), getDomainProjectPath(pomGenerationData), domainServiceClassPath, withProjectPath);
+			mergeProjectFile(context, generator.getTmplDomainServiceClass(), getDomainProjectPath(pomGenerationData), domainServiceClassPath, withProjectPath);
+
+			// Velocity Template for the rest-api resource inteface...
+			final String restapiResourceInterfacePath = generator.getSrcFolder()
+				+ generator.getSrcRestGenerationPackage()
+				+ API_PACKAGE_PATH
+				+ model.getModelClassName()
+				+ FileSuffix.RESOURCE
+				+ FileExtension.JAVA.getExtension();
+			mergeProjectFile(context, generator.getTmplRestResourceInterface(), getRestApiProjectPath(pomGenerationData), restapiResourceInterfacePath, withProjectPath);
+
+			// Velocity Template for the rest-api resource class...
+			final String restapiResourceClassPath = generator.getSrcFolder()
+				+ generator.getSrcRestGenerationPackage()
+				+ model.getModelClassName()
+				+ FileSuffix.REST_RESOURCE
+				+ FileExtension.JAVA.getExtension();
+			mergeProjectFile(context, generator.getTmplRestResourceClass(), getRestApiProjectPath(pomGenerationData), restapiResourceClassPath, withProjectPath);
 		}
 	}
 
@@ -204,8 +225,8 @@ public class GeneratorExtensions
 
 		// Velocity Template for the InitializeDatabase class...
 		final String initDbClassPath = getClassGenerationModelBean().getSrcFolder()
-			+ "de/alpharogroup/db/init/"
-			+ "InitializeDatabase"
+			+ DB_INIT_PATH
+			+ INITIALIZE_DATABASE_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
 		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitInitDbClass(), initProjectPath + "/" + initDbClassPath);
 		final String basePackageName = getClassGenerationModelBean().getBasePackageName().replace(".", "/")+"/";
@@ -213,7 +234,7 @@ public class GeneratorExtensions
 		// Velocity Template for the DatabaseInitialization class...
 		final String dbInitClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ basePackageName
-			+ "DatabaseInitialization"
+			+ DATABASE_INITIALIZATION_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
 		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitDbInitClass(), initProjectPath + "/" + dbInitClassPath);
 
@@ -238,7 +259,7 @@ public class GeneratorExtensions
 
 	private static String getBusinessProjectPath(final PomGenerationBean generationData)
 	{
-		final String businessPomClassPath = generationData.getParentName() + "/"
+		final String businessPomClassPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-business";
 		return businessPomClassPath;
 	}
@@ -253,29 +274,41 @@ public class GeneratorExtensions
 
 	private static String getDomainProjectPath(final PomGenerationBean generationData)
 	{
-		final String domainPomClassPath = generationData.getParentName() + "/"
+		final String domainPomClassPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-domain" ;
 		return domainPomClassPath;
 	}
 
 	private static String getEntitiesProjectPath(final PomGenerationBean generationData)
 	{
-		final String projectPath = generationData.getParentName() + "/"
+		final String projectPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-entities" ;
 		return projectPath;
 	}
 
 	private static String getInitProjectPath(final PomGenerationBean generationData)
 	{
-		final String projectPath = generationData.getParentName() + "/"
+		final String projectPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-init" ;
 		return projectPath;
 	}
 
 	private static String getParentProjectPath(final PomGenerationBean generationData)
 	{
-		final String domainPomClassPath = generationData.getParentName();
-		return domainPomClassPath;
+		final StringBuilder sb = new StringBuilder();
+//		sb.append(System.getProperty("user.home"));
+//		sb.append("/");
+//		sb.append("git");
+		return getParentProjectPath(generationData, sb.toString().trim());
+	}
+
+	private static String getParentProjectPath(final PomGenerationBean generationData, final String basePath)
+	{
+		final String projectPath = generationData.getParentName();
+		if(StringUtils.isNotEmpty(basePath)) {
+			return basePath + "/"+ projectPath;
+		}
+		return projectPath;
 	}
 
 	private static PomGenerationBean getPomGenerationBean() {
@@ -284,11 +317,6 @@ public class GeneratorExtensions
 			pomGenerationData = loadPomGenerationModel(pomGenerationModel);
 		}
 		return pomGenerationData;
-	}
-
-	public static void getPomGenerationModel(final PomGenerationBean generator)
-	{
-
 	}
 
 	/**
@@ -359,6 +387,7 @@ public class GeneratorExtensions
 			model.setDomainServiceClassName(domainServiceInterfaceName );
 			model.setDomainPackageName(generator.getDomainPackageName());
 			model.setDomainMapperPackageName(generator.getDomainMapperPackageName());
+			model.setRestPackageName(generator.getRestPackageName());
 
 		}
 		return repositoryModels;
@@ -366,21 +395,21 @@ public class GeneratorExtensions
 
 	private static String getRestApiProjectPath(final PomGenerationBean generationData)
 	{
-		final String projectPath = generationData.getParentName() + "/"
+		final String projectPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-rest-api" ;
 		return projectPath;
 	}
 
 	private static String getRestClientProjectPath(final PomGenerationBean generationData)
 	{
-		final String projectPath = generationData.getParentName() + "/"
+		final String projectPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-rest-client" ;
 		return projectPath;
 	}
 
 	private static String getRestWebProjectPath(final PomGenerationBean generationData)
 	{
-		final String projectPath = generationData.getParentName() + "/"
+		final String projectPath = getParentProjectPath(generationData) + "/"
 			+ generationData.getParentName() + "-rest-web" ;
 		return projectPath;
 	}
@@ -428,10 +457,11 @@ public class GeneratorExtensions
 		final InputStream is = ClassExtensions.getResourceAsStream(pomGenerationBean);
 		final String xml = ReadFileExtensions.inputStream2String(is);
 		final PomGenerationBean generationData = XmlExtensions.toObjectWithXStream(xml);
+		generationData.setClassGenerationModel(getClassGenerationModelBean());
 		return generationData;
 	}
 
-	private static void mergeProjectFile(final ClassGenerationModelBean generator,
+	private static void mergeProjectFile(
 		final VelocityContext context, final String templateFileName, final String projectPath,
 		final String generatedFilePath, final boolean withProjectPath) throws IOException
 	{

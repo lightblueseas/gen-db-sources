@@ -2,6 +2,7 @@
 	<qualifiedModelClassNames class="linked-hash-set"/>
 	<!-- PACKAGE NAMES -->
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
+	<restPackageName>de.alpharogroup.questionaries.system.rest</restPackageName>
 	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
 	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
 	<domainMapperPackageName>de.alpharogroup.questionaries.system.mapper</domainMapperPackageName>
@@ -14,6 +15,7 @@
 	<templateDir>src/main/resources/</templateDir>
 	<!-- SOURCE GENERATION PACKAGE NAMES -->
 	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
+	<srcRestGenerationPackage>de/alpharogroup/questionaries/system/rest/</srcRestGenerationPackage>
 	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
 	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
 	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>

@@ -22,6 +22,7 @@ public class ClassGenerationModelBean {
     private Set<String> qualifiedModelClassNames;
     /** the package names have the suffix:'PackageName' */
     private String basePackageName;
+    private String restPackageName;
     private String modelPackageName;
     private String domainPackageName;
     private String repositoryPackageName;
@@ -34,6 +35,7 @@ public class ClassGenerationModelBean {
     /** SOURCE GENERATION PACKAGE NAMES have the prefix 'scr' and the suffix 'GenerationPackage'. */
     private String srcGenerationPackage;
     private String srcTestGenerationPackage;
+    private String srcRestGenerationPackage;
     private String srcServiceGenerationPackage;
     private String srcDomainServiceGenerationPackage;
     private String srcDomainGenerationPackage;

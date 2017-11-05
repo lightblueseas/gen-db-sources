@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
 		<groupId>de.alpharogroup</groupId>
@@ -7,37 +8,57 @@
 		<version>4.1.0</version>
 		<relativePath />
 	</parent>
-	
-  <artifactId>gen-db-sources</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  
+
+	<artifactId>gen-db-sources</artifactId>
+	<version>0.9.1-SNAPSHOT</version>
+
 	<properties>
 		<!-- JCOMMONS-LANG version -->
 		<jcommons-lang.version>4.26.0-SNAPSHOT</jcommons-lang.version>
+		<!-- VELOCITY-EXTENSIONS version -->
+		<velocity-extensions.version>1.1.0</velocity-extensions.version>
 		<!-- XML-EXTENSIONS version -->
 		<xml-extensions.version>4.16.0</xml-extensions.version>
 		<data-usertype.version>4.1.0</data-usertype.version>
 		<data-api.version>4.1.0</data-api.version>
-	</properties>	
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<!-- VELOCITY-EXTENSIONS DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>velocity-extensions</artifactId>
+				<version>${velocity-extensions.version}</version>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
 
 	<dependencies>
-	
+
 		<!-- SPRING DEPENDENCIES -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-		</dependency>		
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 		</dependency>
-		
+		<!-- VELOCITY-EXTENSIONS DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>velocity-extensions</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
@@ -75,7 +96,6 @@
 		</dependency>
 
 	</dependencies>
-	
 
 	<build>
 
@@ -93,6 +113,5 @@
 		</plugins>
 
 	</build>
-	
-  
+
 </project>

@@ -1,21 +1,15 @@
 package de.alpharogroup.gen.src.generator;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 
 import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FileSuffix;
-import de.alpharogroup.file.create.CreateFileExtensions;
 import de.alpharogroup.file.read.ReadFileExtensions;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.gen.src.model.ClassGenerationModelBean;
@@ -25,17 +19,18 @@ import de.alpharogroup.lang.ClassExtensions;
 import de.alpharogroup.lang.PackageExtensions;
 import de.alpharogroup.lang.TypeArgumentsExtensions;
 import de.alpharogroup.string.StringExtensions;
+import de.alpharogroup.velocity.VelocityExtensions;
 import de.alpharogroup.xml.XmlExtensions;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * The class {@link GeneratorExtensions} generates repositories, service and unit test classes from
  * the model classes that are in the gen.res.model package.
  */
-@Slf4j
+//@Slf4j
 public class GeneratorExtensions
 {
 
+	private static final String API_PACKAGE_PATH = "/api/";
 	private static final String POM_XML_FILENAME = "pom.xml";
 	private static final String GITIGNORE_FILENAME = ".gitignore";
 	private static final String LOG4J_PROPERTIES_FILENAME = "log4j.properties";
@@ -55,87 +50,77 @@ public class GeneratorExtensions
 	 *             the IO exception
 	 */
 	public static void generateClasses(final ClassGenerationModelBean generator,
-		final List<RepositoryClassModel> repositoryModels, final PomGenerationBean pomGenerationData) throws IOException
+		final List<RepositoryClassModel> repositoryModels, final PomGenerationBean pomGenerationData, final boolean withProjectPath) throws IOException
 	{
 		for (final RepositoryClassModel model : repositoryModels)
 		{
-
 			final VelocityContext context = new VelocityContext();
 			context.put("model", model);
 			// Velocity Template for the repository classes...
-			final String entitiesProjectPath = getEntitiesProjectPath(pomGenerationData);
 			final String repositoryClassPath = generator.getSrcFolder()
 				+ generator.getSrcGenerationPackage() + model.getRepositoryClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplRepositoryClass(), entitiesProjectPath + "/" + repositoryClassPath);
+			mergeProjectFile(generator, context, generator.getTmplRepositoryClass(), getEntitiesProjectPath(pomGenerationData), repositoryClassPath, withProjectPath);
 
 			// Velocity Template for the repository unit test classes...
-			final String initProjectPath = getInitProjectPath(pomGenerationData);
 			final String repositoryTestClassPath = generator.getSrcTestFolder()
 				+ generator.getSrcTestGenerationPackage() + model.getRepositoryClassName()
 				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplRepositoryTestClass(), initProjectPath + "/" + repositoryTestClassPath);
+			mergeProjectFile(generator, context, generator.getTmplRepositoryTestClass(), getInitProjectPath(pomGenerationData), repositoryTestClassPath, withProjectPath);
 
 			// Velocity Template for the business services intefaces...
-			final String businessProjectPath = getBusinessProjectPath(pomGenerationData);
-			final String serviceInterfaceClassPath = generator.getSrcFolder()
-				+ generator.getSrcServiceGenerationPackage() + "/api/" + model.getServiceClassName()
+			final String serviceInterfacePath = generator.getSrcFolder()
+				+ generator.getSrcServiceGenerationPackage() + API_PACKAGE_PATH + model.getServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplServiceInterface(), businessProjectPath + "/" + serviceInterfaceClassPath);
+			mergeProjectFile(generator, context, generator.getTmplServiceInterface(), getBusinessProjectPath(pomGenerationData), serviceInterfacePath, withProjectPath);
 
 			// Velocity Template for the business services classes...
 			final String serviceClassPath =
 				  generator.getSrcFolder()
 				+ generator.getSrcServiceGenerationPackage()
 				+ model.getModelClassName()
-				+ "Business"
-				+ FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplServiceClass(), businessProjectPath + "/" + serviceClassPath);
+				+ FileSuffix.BUSINESS_SERVICE + FileExtension.JAVA.getExtension();
+			mergeProjectFile(generator, context, generator.getTmplServiceClass(), getBusinessProjectPath(pomGenerationData), serviceClassPath, withProjectPath);
 
 			// Velocity Template for the business services unit test classes...
 			final String serviceTestClassPath =
 				  generator.getSrcTestFolder()
 				+ generator.getSrcServiceGenerationPackage()
 				+ model.getModelClassName()
-				+ "Business"
-				+ FileSuffix.TEST
-				+ FileSuffix.SERVICE + FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplServiceTestClass(), initProjectPath + "/" + serviceTestClassPath);
+				+ FileSuffix.BUSINESS_SERVICE
+				+ FileSuffix.TEST + FileExtension.JAVA.getExtension();
+			mergeProjectFile(generator, context, generator.getTmplServiceTestClass(), getInitProjectPath(pomGenerationData), serviceTestClassPath, withProjectPath);
 
 			// Velocity Template for the domain object...
-			final String domainProjectPath = getDomainProjectPath(pomGenerationData);
 			final String domainClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainGenerationPackage() + model.getDomainClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplDomainClass(), domainProjectPath + "/" + domainClassPath);
+			mergeProjectFile(generator, context, generator.getTmplDomainClass(), getDomainProjectPath(pomGenerationData), domainClassPath, withProjectPath);
 
 			// Velocity Template for the domain mapper object...
 			final String domainMapperClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainMapperGenerationPackage() + model.getModelClassName()
-				+ "Mapper"
+				+ FileSuffix.MAPPER
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplDomainMapperClass(), domainProjectPath + "/" + domainMapperClassPath);
+			mergeProjectFile(generator, context, generator.getTmplDomainMapperClass(), getDomainProjectPath(pomGenerationData), domainMapperClassPath, withProjectPath);
 
 			// Velocity Template for the domain services intefaces...
-			final String domainServiceInterfaceClassPath = generator.getSrcFolder()
+			final String domainServiceInterfacePath = generator.getSrcFolder()
 				+ generator.getSrcDomainServiceGenerationPackage()
-				+ "/api/"
+				+ API_PACKAGE_PATH
 				+ model.getDomainServiceClassName()
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplDomainServiceInterface(), domainProjectPath + "/" + domainServiceInterfaceClassPath);
+			mergeProjectFile(generator, context, generator.getTmplDomainServiceInterface(), getDomainProjectPath(pomGenerationData), domainServiceInterfacePath, withProjectPath);
 
 			// Velocity Template for the domain services classes...
 			final String domainServiceClassPath = generator.getSrcFolder()
 				+ generator.getSrcDomainServiceGenerationPackage()
 				+ model.getDomainClassName()
-				+ "Domain"
-				+ FileSuffix.SERVICE
+				+ FileSuffix.DOMAIN_SERVICE
 				+ FileExtension.JAVA.getExtension();
-			mergeToContext(context, generator.getTmplDomainServiceClass(), domainProjectPath + "/" + domainServiceClassPath);
-			log.debug("domainServiceClassPath:"+domainServiceClassPath);
+			mergeProjectFile(generator, context, generator.getTmplDomainServiceClass(), getDomainProjectPath(pomGenerationData), domainServiceClassPath, withProjectPath);
 		}
 	}
-
 
 	/**
 	 * Generate pom files.
@@ -151,35 +136,33 @@ public class GeneratorExtensions
 		final VelocityContext context = new VelocityContext();
 		context.put("model", generationData);
 
-
-
 		// Generate parent data pom.xml
 		final String parentProjectPath = getParentProjectPath(generationData);
 		final String parentDataPomClassPath = parentProjectPath + "/"
 			 + POM_XML_FILENAME;
-		mergeToContext(context, generationData.getDataPom(), parentDataPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), parentProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getDataPom(), parentDataPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), parentProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate business pom.xml
 		final String businessProjectPath = getBusinessProjectPath(generationData);
 		final String businessPomClassPath = businessProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getBusinessPom(), businessPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), businessProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getBusinessPom(), businessPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), businessProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate domain pom.xml
 		final String domainProjectPath = getDomainProjectPath(generationData);
 		final String domainPomClassPath = domainProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getDomainPom(), domainPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), domainProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getDomainPom(), domainPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), domainProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate entities pom.xml
 		final String entitiesProjectPath = getEntitiesProjectPath(generationData);
 		final String entitiesPomClassPath = entitiesProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getEntitiesPom(), entitiesPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), entitiesProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getEntitiesPom(), entitiesPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), entitiesProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate init pom.xml
 		final String initProjectPath = getInitProjectPath(generationData);
@@ -187,44 +170,44 @@ public class GeneratorExtensions
 		final String initSrcTestResourcesPath = initProjectPath + "/" + PathFinder.SOURCE_FOLDER_SRC_TEST_RESOURCES;
 		final String initPomClassPath = initProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getInitPom(), initPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), initProjectPath + "/" + GITIGNORE_FILENAME);
-		mergeToContext(context, getClassGenerationModelBean().getTmplLog4jProperties(), initSrcMainResourcesPath+ "/" + LOG4J_PROPERTIES_FILENAME);
-		mergeToContext(context, getClassGenerationModelBean().getTmplH2ApplicationContextXml(),initSrcTestResourcesPath + "/" + "test-h2-applicationContext.xml");
-		mergeToContext(context, getClassGenerationModelBean().getTmplApplicationContextXml(), initSrcTestResourcesPath + "/" + "test-applicationContext.xml");
-		mergeToContext(context, getClassGenerationModelBean().getTmplTestNgXml(), initSrcTestResourcesPath + "/" + "testng.xml");
-		mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceH2Xml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence-h2.xml");
-		mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceXml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence.xml");
-		mergeToContext(context, getClassGenerationModelBean().getTmplJdbcH2Properties(), initSrcMainResourcesPath+ "/" + "jdbc-h2.properties");
-		mergeToContext(context, getClassGenerationModelBean().getTmplJdbcProperties(), initSrcMainResourcesPath+ "/" + "jdbc.properties");
+		VelocityExtensions.mergeToContext(context, generationData.getInitPom(), initPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), initProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplLog4jProperties(), initSrcMainResourcesPath+ "/" + LOG4J_PROPERTIES_FILENAME);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplH2ApplicationContextXml(),initSrcTestResourcesPath + "/" + "test-h2-applicationContext.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplApplicationContextXml(), initSrcTestResourcesPath + "/" + "test-applicationContext.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplTestNgXml(), initSrcTestResourcesPath + "/" + "testng.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceH2Xml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence-h2.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplPersistenceXml(), initSrcMainResourcesPath+ "/META-INF/" + "persistence.xml");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplJdbcH2Properties(), initSrcMainResourcesPath+ "/" + "jdbc-h2.properties");
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplJdbcProperties(), initSrcMainResourcesPath+ "/" + "jdbc.properties");
 
 		// Generate rest-api pom.xml
 		final String restApiProjectPath = getRestApiProjectPath(generationData);
 		final String restApiPomClassPath = restApiProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getRestApiPom(), restApiPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restApiProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getRestApiPom(), restApiPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restApiProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate rest-client pom.xml
 		final String restClientProjectPath = getRestClientProjectPath(generationData);
 		final String restClientPomClassPath = restClientProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getRestClientPom(), restClientPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restClientProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getRestClientPom(), restClientPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restClientProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Generate rest-web pom.xml
 		final String restWebProjectPath = getRestWebProjectPath(generationData);
 		final String restWebPomClassPath = restWebProjectPath + "/" + POM_XML_FILENAME;
 
-		mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
-		mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restWebProjectPath + "/" + GITIGNORE_FILENAME);
+		VelocityExtensions.mergeToContext(context, generationData.getRestWebPom(), restWebPomClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplGitignore(), restWebProjectPath + "/" + GITIGNORE_FILENAME);
 
 		// Velocity Template for the InitializeDatabase class...
 		final String initDbClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ "de/alpharogroup/db/init/"
 			+ "InitializeDatabase"
 			+ FileExtension.JAVA.getExtension();
-		mergeToContext(context, getClassGenerationModelBean().getTmplInitInitDbClass(), initProjectPath + "/" + initDbClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitInitDbClass(), initProjectPath + "/" + initDbClassPath);
 		final String basePackageName = getClassGenerationModelBean().getBasePackageName().replace(".", "/")+"/";
 
 		// Velocity Template for the DatabaseInitialization class...
@@ -232,7 +215,7 @@ public class GeneratorExtensions
 			+ basePackageName
 			+ "DatabaseInitialization"
 			+ FileExtension.JAVA.getExtension();
-		mergeToContext(context, getClassGenerationModelBean().getTmplInitDbInitClass(), initProjectPath + "/" + dbInitClassPath);
+		VelocityExtensions.mergeToContext(context, getClassGenerationModelBean().getTmplInitDbInitClass(), initProjectPath + "/" + dbInitClassPath);
 
 	}
 
@@ -242,14 +225,14 @@ public class GeneratorExtensions
 	 * @throws Exception
 	 *             the exception
 	 */
-	public static void generateRepositoryClasses() throws Exception
+	public static void generateRepositoryClasses(final boolean withProjectPath) throws Exception
 	{
 		initializeQualifiedModelClassNames(getClassGenerationModelBean());
 
 		final List<RepositoryClassModel> repositoryModels = getRepositoryClassModels(
 			getClassGenerationModelBean());
 
-		generateClasses(getClassGenerationModelBean(), repositoryModels, getPomGenerationBean());
+		generateClasses(getClassGenerationModelBean(), repositoryModels, getPomGenerationBean(), withProjectPath);
 
 	}
 
@@ -268,15 +251,12 @@ public class GeneratorExtensions
 		return classGenerationData;
 	}
 
-
-
 	private static String getDomainProjectPath(final PomGenerationBean generationData)
 	{
 		final String domainPomClassPath = generationData.getParentName() + "/"
 			+ generationData.getParentName() + "-domain" ;
 		return domainPomClassPath;
 	}
-
 
 	private static String getEntitiesProjectPath(final PomGenerationBean generationData)
 	{
@@ -404,7 +384,6 @@ public class GeneratorExtensions
 		return projectPath;
 	}
 
-
 	/**
 	 * Reads the qualified entity class names from the entities in the specified package.
 	 *
@@ -451,33 +430,17 @@ public class GeneratorExtensions
 		return generationData;
 	}
 
-	/**
-	 * Merge to context.
-	 *
-	 * @param context
-	 *            the context
-	 * @param templateFileName
-	 *            the template file name
-	 * @param className
-	 *            the class name
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 * @deprecated use instead the same name method from velocity extensions.
-	 */
-	@Deprecated
-	private static void mergeToContext(final VelocityContext context, final String templateFileName, final String className) throws IOException
+	private static void mergeProjectFile(final ClassGenerationModelBean generator,
+		final VelocityContext context, final String templateFileName, final String projectPath,
+		final String generatedFilePath, final boolean withProjectPath) throws IOException
 	{
-		File generatedClassFile;
-		generatedClassFile = new File(className);
-		CreateFileExtensions.newFileQuietly(generatedClassFile);
-		final BufferedWriter domainServiceInterfaceWriter = new BufferedWriter(
-			new FileWriter(className));
-
-		final Template domainServiceInterfaceTemplate = Velocity
-			.getTemplate(templateFileName);
-		domainServiceInterfaceTemplate.merge(context, domainServiceInterfaceWriter);
-		domainServiceInterfaceWriter.flush();
-		domainServiceInterfaceWriter.close();
+		String fileName;
+		if(withProjectPath) {
+			fileName = projectPath + "/" + generatedFilePath;
+		} else {
+			fileName = generatedFilePath;
+		}
+		VelocityExtensions.mergeToContext(context, templateFileName, fileName);
 	}
 
 }

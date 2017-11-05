@@ -8,7 +8,7 @@ public class GeneratorExtensionsTest
 	@Test(enabled = true)
 	public void testGenerateClasses() throws Exception
 	{
-		GeneratorExtensions.generateRepositoryClasses();
+		GeneratorExtensions.generateRepositoryClasses(false);
 	}
 
 	@Test(enabled = true)

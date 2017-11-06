@@ -30,6 +30,16 @@ import de.alpharogroup.xml.XmlExtensions;
 //@Slf4j
 public class GeneratorExtensions
 {
+	private static final String ENTITIES = "-entities";
+
+	private static final String INIT = "-init";
+
+	private static final String REST_API = "-rest-api";
+
+	private static final String REST_CLIENT = "-rest-client";
+
+	private static final String REST_WEB = "-rest-web";
+
 	/**
 	 * The Constant SOURCE_FOLDER_SRC_MAIN_RESOURCES keeps the relative path for the source folder
 	 * 'src/main/resources' in maven projects.
@@ -332,14 +342,14 @@ public class GeneratorExtensions
 	private static String getEntitiesProjectPath(final PomGenerationBean generationData)
 	{
 		final String projectPath = getParentProjectPath(generationData) + "/"
-			+ generationData.getParentName() + "-entities" ;
+			+ generationData.getParentName() + ENTITIES ;
 		return projectPath;
 	}
 
 	private static String getInitProjectPath(final PomGenerationBean generationData)
 	{
 		final String projectPath = getParentProjectPath(generationData) + "/"
-			+ generationData.getParentName() + "-init" ;
+			+ generationData.getParentName() + INIT ;
 		return projectPath;
 	}
 
@@ -446,21 +456,21 @@ public class GeneratorExtensions
 	private static String getRestApiProjectPath(final PomGenerationBean generationData)
 	{
 		final String projectPath = getParentProjectPath(generationData) + "/"
-			+ generationData.getParentName() + "-rest-api" ;
+			+ generationData.getParentName() + REST_API ;
 		return projectPath;
 	}
 
 	private static String getRestClientProjectPath(final PomGenerationBean generationData)
 	{
 		final String projectPath = getParentProjectPath(generationData) + "/"
-			+ generationData.getParentName() + "-rest-client" ;
+			+ generationData.getParentName() + REST_CLIENT ;
 		return projectPath;
 	}
 
 	private static String getRestWebProjectPath(final PomGenerationBean generationData)
 	{
 		final String projectPath = getParentProjectPath(generationData) + "/"
-			+ generationData.getParentName() + "-rest-web" ;
+			+ generationData.getParentName() + REST_WEB ;
 		return projectPath;
 	}
 

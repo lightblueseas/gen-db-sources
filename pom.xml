@@ -21,6 +21,7 @@
 		<xml-extensions.version>4.16.0</xml-extensions.version>
 		<data-usertype.version>4.1.0</data-usertype.version>
 		<data-api.version>4.1.0</data-api.version>
+		<parent>quiz-system</parent>
 	</properties>
 
 	<dependencyManagement>
@@ -94,7 +95,7 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>domain-api</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>rest-api</artifactId>
@@ -104,10 +105,32 @@
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>rest-client</artifactId>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>de.alpharogroup</groupId>
+					<artifactId>jpa-data-gen-maven-plugin</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<configuration>
+						<parentName>${parent}</parentName>
+						<dataProjectName>${parent}-data</dataProjectName>
+						<dataProjectVersion>1.0-SNAPSHOT</dataProjectVersion>
+						<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
+						<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
+						<persistenceunitName>quiz</persistenceunitName>
+					</configuration>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
 
 		<plugins>
 
@@ -118,6 +141,11 @@
 
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jpa-data-gen-maven-plugin</artifactId>
 			</plugin>
 
 		</plugins>

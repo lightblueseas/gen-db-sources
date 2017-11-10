@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GeneratorExtensionsTest
 {
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testdummy() throws Exception
 	{
 		final String userHome = System.getProperty("user.home");
@@ -17,13 +17,13 @@ public class GeneratorExtensionsTest
 		log.info("System.getenv(\"HOME\"):"+envVarHome);
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testGenerateClasses() throws Exception
 	{
-		GeneratorExtensions.generateRepositoryClasses(false);
+		GeneratorExtensions.generateRepositoryClasses(true);
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testGeneratePomFiles() throws Exception
 	{
 		GeneratorExtensions.generatePomFiles();

@@ -26,14 +26,5 @@ public class PomGenerationBean
 	private String dataProjectVersion;
 	private String dataProjectParentVersion;
 	private String persistenceunitName;
-    // pom files
-    private String businessPom;
-    private String dataPom;
-    private String domainPom;
-    private String entitiesPom;
-    private String initPom;
-    private String restApiPom;
-    private String restClientPom;
-    private String restWebPom;
 
 }

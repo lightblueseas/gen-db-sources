@@ -125,6 +125,7 @@
 						<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
 						<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
 						<persistenceunitName>quiz</persistenceunitName>
+						<password>secret</password>
 					</configuration>
 				</plugin>
 

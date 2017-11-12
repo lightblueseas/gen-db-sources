@@ -11,6 +11,8 @@
 
 	<artifactId>gen-db-sources</artifactId>
 	<version>0.9.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<inceptionYear>2015</inceptionYear>
 
 	<properties>
 		<!-- JCOMMONS-LANG version -->
@@ -153,4 +155,7 @@
 
 	</build>
 
+	<modules>
+		<module>gen-db-core</module>
+	</modules>
 </project>

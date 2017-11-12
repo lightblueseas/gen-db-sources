@@ -1,7 +1,6 @@
 package de.alpharogroup.gen.src.generator;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,7 +10,6 @@ import org.apache.velocity.VelocityContext;
 
 import de.alpharogroup.file.FileExtension;
 import de.alpharogroup.file.FileSuffix;
-import de.alpharogroup.file.read.ReadFileExtensions;
 import de.alpharogroup.file.search.PathFinder;
 import de.alpharogroup.gen.src.model.ClassGenerationModelBean;
 import de.alpharogroup.gen.src.model.PomGenerationBean;
@@ -240,11 +238,11 @@ public class GeneratorExtensions
 			+ PathFinder.SOURCE_FOLDER_SRC_TEST_RESOURCES;
 		final String initPomClassPath = initProjectPath + "/" + POM_XML_FILENAME;
 
-		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplInitPom(), initPomClassPath);
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplInitPom(),
+			initPomClassPath);
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplGitignore(),
 			initProjectPath + "/" + GITIGNORE_FILENAME);
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplLog4jProperties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplLog4jProperties(),
 			initSrcMainResourcesPath + "/" + LOG4J_PROPERTIES_FILENAME);
 		VelocityExtensions.mergeToContext(context,
 			getVelocityTemplates().getTmplH2ApplicationContextXml(),
@@ -254,17 +252,13 @@ public class GeneratorExtensions
 			initSrcTestResourcesPath + "/" + "test-applicationContext.xml");
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplTestNgXml(),
 			initSrcTestResourcesPath + "/" + "testng.xml");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplPersistenceH2Xml(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplPersistenceH2Xml(),
 			initSrcMainResourcesPath + "/META-INF/" + "persistence-h2.xml");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplPersistenceXml(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplPersistenceXml(),
 			initSrcMainResourcesPath + "/META-INF/" + "persistence.xml");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplJdbcH2Properties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJdbcH2Properties(),
 			initSrcMainResourcesPath + "/" + "jdbc-h2.properties");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplJdbcProperties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJdbcProperties(),
 			initSrcMainResourcesPath + "/" + "jdbc.properties");
 
 		// Generate rest-api pom.xml
@@ -297,21 +291,16 @@ public class GeneratorExtensions
 			restWebPomClassPath);
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplGitignore(),
 			restWebProjectPath + "/" + GITIGNORE_FILENAME);
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplLog4jProperties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplLog4jProperties(),
 			restWebSrcMainResourcesPath + "/" + LOG4J_PROPERTIES_FILENAME);
 
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplPersistenceH2Xml(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplPersistenceH2Xml(),
 			restWebSrcMainResourcesPath + "/META-INF/" + "persistence-h2.xml");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplPersistenceXml(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplPersistenceXml(),
 			restWebSrcMainResourcesPath + "/META-INF/" + "persistence.xml");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplJdbcH2Properties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJdbcH2Properties(),
 			restWebSrcMainResourcesPath + "/" + "jdbc-h2.properties");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplJdbcProperties(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJdbcProperties(),
 			restWebSrcMainResourcesPath + "/" + "jdbc.properties");
 
 		VelocityExtensions.mergeToContext(context,
@@ -319,8 +308,7 @@ public class GeneratorExtensions
 			restWebSrcMainResourcesPath + "/" + "data-application-context.xml");
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplIndexJsp(),
 			restWebSrcMainWebappPath + "/" + "index.jsp");
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplManifestMf(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplManifestMf(),
 			restWebSrcMainWebappPath + "/META-INF/" + "MANIFEST.MF");
 		VelocityExtensions.mergeToContext(context,
 			getVelocityTemplates().getTmplProjectProperties(),
@@ -334,8 +322,7 @@ public class GeneratorExtensions
 		// Velocity Template for the InitializeDatabase class...
 		final String initializeDatabaseClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ DB_INIT_PATH + INITIALIZE_DATABASE_CLASSNAME + FileExtension.JAVA.getExtension();
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplInitInitDbClass(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplInitInitDbClass(),
 			initProjectPath + "/" + initializeDatabaseClassPath);
 		final String basePackageName = getClassGenerationModelBean().getBasePackageName()
 			.replace(".", "/") + "/";
@@ -344,8 +331,7 @@ public class GeneratorExtensions
 		final String databaseInitializationClassPath = getClassGenerationModelBean().getSrcFolder()
 			+ basePackageName + DATABASE_INITIALIZATION_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplInitDbInitClass(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplInitDbInitClass(),
 			initProjectPath + "/" + databaseInitializationClassPath);
 
 
@@ -353,8 +339,7 @@ public class GeneratorExtensions
 		final String applicationJettyRunnerClassPath = getClassGenerationModelBean()
 			.getSrcTestFolder() + basePackageName + "ApplicationJettyRunner"
 			+ FileExtension.JAVA.getExtension();
-		VelocityExtensions.mergeToContext(context,
-			getVelocityTemplates().getTmplJettyRunnerClass(),
+		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJettyRunnerClass(),
 			restWebProjectPath + "/" + applicationJettyRunnerClassPath);
 
 
@@ -453,7 +438,7 @@ public class GeneratorExtensions
 		if (templates == null)
 		{
 			final String velocityTemplatesModelBean = "VelocityTemplatesModelBean.xml";
-			templates = loadObject(velocityTemplatesModelBean);
+			templates = XmlExtensions.loadObject(velocityTemplatesModelBean);
 		}
 		return templates;
 	}
@@ -579,9 +564,7 @@ public class GeneratorExtensions
 	public static ClassGenerationModelBean loadClassGenerationModel(
 		final String classGenerationModel)
 	{
-		final InputStream is = ClassExtensions.getResourceAsStream(classGenerationModel);
-		final String xml = ReadFileExtensions.inputStream2String(is);
-		final ClassGenerationModelBean generationData = XmlExtensions.toObjectWithXStream(xml);
+		final ClassGenerationModelBean generationData = XmlExtensions.loadObject(classGenerationModel);
 		return generationData;
 	}
 
@@ -594,14 +577,8 @@ public class GeneratorExtensions
 	 */
 	public static PomGenerationBean loadPomGenerationModel(final String pomGenerationBean)
 	{
-		return loadObject(pomGenerationBean);
-	}
-
-	public static<T> T loadObject(final String xmlFile) {
-		final InputStream is = ClassExtensions.getResourceAsStream(xmlFile);
-		final String xml = ReadFileExtensions.inputStream2String(is);
-		final T object = XmlExtensions.toObjectWithXStream(xml);
-		return object;
+		final PomGenerationBean pomGeneration = XmlExtensions.loadObject(pomGenerationBean);
+		return pomGeneration;
 	}
 
 	private static void mergeProjectFile(final VelocityContext context,

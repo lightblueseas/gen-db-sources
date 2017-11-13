@@ -1,0 +1,38 @@
+package $model.servicePackageName;
+
+import de.alpharogroup.db.service.AbstractBusinessService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import ${model.repositoryPackageName}.${model.repositoryClassName};
+import $model.modelQuilifiedClassName;
+import ${model.servicePackageName}.api.${model.modelClassName}Service;
+
+/**
+ * The service class {@link ${model.modelClassName}BusinessService}.
+ */
+@Transactional
+@Service("${model.repServiceClassName}")
+public class ${model.modelClassName}BusinessService 
+	extends
+		AbstractBusinessService<$model.modelClassName, $model.primaryKeyClassName, ${model.repositoryClassName}> 
+	implements 
+		${model.modelClassName}Service
+{
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Sets the specific repository.
+	 *
+	 * @param repository the repository
+	 */
+	@Autowired
+	public void set${model.repositoryClassName}(${model.repositoryClassName} repository) {
+		setRepository(repository);
+	}
+
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+	<test name="Test">
+		<classes><!-- TODO enter a loop for repository classes and service classes -->
+		<!--
+			<class name="${model.classGenerationModel.repositoryPackageName}.${model.classGenerationModel.repositoryClassName}Test" />
+			<class name="${model.classGenerationModel.servicePackageName}.${model.classGenerationModel.modelClassName}BusinessServiceH2Test" />
+			<class name="${model.classGenerationModel.servicePackageName}.${model.classGenerationModel.modelClassName}BusinessServiceTest" />
+		 -->
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->

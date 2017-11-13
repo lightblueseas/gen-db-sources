@@ -1,0 +1,45 @@
+<de.alpharogroup.gen.src.model.VelocityTemplatesModelBean>
+	<!-- POM TEMPLATE FILES -->
+	<tmplDataPom>src/main/resources/vm/templates/data-project-pom.vm</tmplDataPom>
+	<tmplBusinessPom>src/main/resources/vm/templates/business/business-pom.vm</tmplBusinessPom>
+	<tmplDomainPom>src/main/resources/vm/templates/domain/domain-pom.vm</tmplDomainPom>	
+	<tmplEntitiesPom>src/main/resources/vm/templates/entities/entities-pom.vm</tmplEntitiesPom>	
+	<tmplInitPom>src/main/resources/vm/templates/init/init-pom.vm</tmplInitPom>	
+	<tmplRestApiPom>src/main/resources/vm/templates/restapi/rest-api-pom.vm</tmplRestApiPom>	
+	<tmplRestClientPom>src/main/resources/vm/templates/restclient/rest-client-pom.vm</tmplRestClientPom>	
+	<tmplRestWebPom>src/main/resources/vm/templates/restweb/rest-web-pom.vm</tmplRestWebPom>
+	<!-- TEMPLATE FILES -->
+	<tmplGitignore>src/main/resources/vm/templates/gitignore.vm</tmplGitignore>
+	<tmplLog4jProperties>src/main/resources/vm/templates/log4j.properties.vm</tmplLog4jProperties>
+	<tmplRepositoryClass>src/main/resources/vm/templates/entities/repository.vm</tmplRepositoryClass>
+	<tmplServiceClass>src/main/resources/vm/templates/business/service.vm</tmplServiceClass>
+	<tmplServiceInterface>src/main/resources/vm/templates/business/serviceinterface.vm</tmplServiceInterface>	
+	<tmplDomainClass>src/main/resources/vm/templates/domain/domain-object.vm</tmplDomainClass>		
+	<tmplDomainMapperClass>src/main/resources/vm/templates/domain/domain-mapper.vm</tmplDomainMapperClass>	
+	<tmplDomainServiceClass>src/main/resources/vm/templates/domain/domainService.vm</tmplDomainServiceClass>
+	<tmplDomainServiceInterface>src/main/resources/vm/templates/domain/domainServiceinterface.vm</tmplDomainServiceInterface>	
+	<tmplInitDbInitClass>src/main/resources/vm/templates/init/DatabaseInitialization.vm</tmplInitDbInitClass>
+	<tmplInitInitDbClass>src/main/resources/vm/templates/init/InitializeDatabase.vm</tmplInitInitDbClass>	
+	<tmplJdbcH2Properties>src/main/resources/vm/templates/init/jdbc-h2.properties.vm</tmplJdbcH2Properties>	
+	<tmplJdbcProperties>src/main/resources/vm/templates/init/jdbc.properties.vm</tmplJdbcProperties>
+	<tmplPersistenceH2Xml>src/main/resources/vm/templates/init/persistence-h2.vm</tmplPersistenceH2Xml>	
+	<tmplPersistenceXml>src/main/resources/vm/templates/init/persistence.vm</tmplPersistenceXml>
+	<tmplRepositoryTestClass>src/main/resources/vm/templates/init/repositoryTest.vm</tmplRepositoryTestClass>
+	<tmplServiceH2TestClass>src/main/resources/vm/templates/init/serviceH2Test.vm</tmplServiceH2TestClass>	
+	<tmplServiceTestClass>src/main/resources/vm/templates/init/serviceTest.vm</tmplServiceTestClass>	
+	<tmplApplicationContextXml>src/main/resources/vm/templates/init/test-applicationContext.vm</tmplApplicationContextXml>
+	<tmplH2ApplicationContextXml>src/main/resources/vm/templates/init/test-h2-applicationContext.vm</tmplH2ApplicationContextXml>
+	<tmplTestNgXml>src/main/resources/vm/templates/init/testng.vm</tmplTestNgXml>	
+	<tmplRestResourceClass>src/main/resources/vm/templates/restapi/restresource.vm</tmplRestResourceClass>	
+	<tmplRestResourceInterface>src/main/resources/vm/templates/restapi/restresource-interface.vm</tmplRestResourceInterface>
+	<tmplRestClientClass>src/main/resources/vm/templates/restclient/rest-client.vm</tmplRestClientClass>		
+	<tmplRestClientTestClass>src/main/resources/vm/templates/restclient/rest-clientTest.vm</tmplRestClientTestClass>
+	<tmplJettyRunnerClass>src/main/resources/vm/templates/restweb/ApplicationJettyRunner.vm</tmplJettyRunnerClass>	
+	<tmplDataApplicationContextXml>src/main/resources/vm/templates/restweb/data-application-context.vm</tmplDataApplicationContextXml>
+	<tmplIndexJsp>src/main/resources/vm/templates/restweb/index.jsp.vm</tmplIndexJsp>
+	<tmplManifestMf>src/main/resources/vm/templates/restweb/MANIFEST.MF.vm</tmplManifestMf>	
+	<tmplProjectProperties>src/main/resources/vm/templates/restweb/project.properties.vm</tmplProjectProperties>
+	<tmplWebApplicationContextXml>src/main/resources/vm/templates/restweb/web-application-context.vm</tmplWebApplicationContextXml>	
+	<tmplWebXml>src/main/resources/vm/templates/restweb/web.vm</tmplWebXml>		
+	
+</de.alpharogroup.gen.src.model.VelocityTemplatesModelBean>

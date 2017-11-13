@@ -1,0 +1,161 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>de.alpharogroup</groupId>
+		<artifactId>persistence-api</artifactId>
+		<version>4.1.0</version>
+		<relativePath />
+	</parent>
+
+	<artifactId>gen-db-sources</artifactId>
+	<version>0.9.1</version>
+	<packaging>pom</packaging>
+	<inceptionYear>2015</inceptionYear>
+
+	<properties>
+		<!-- JCOMMONS-LANG version -->
+		<jcommons-lang.version>4.25.0</jcommons-lang.version>
+		<!-- VELOCITY-EXTENSIONS version -->
+		<velocity-extensions.version>1.1.0</velocity-extensions.version>
+		<!-- XML-EXTENSIONS version -->
+		<xml-extensions.version>4.17.0</xml-extensions.version>
+		<data-usertype.version>4.1.0</data-usertype.version>
+		<data-api.version>4.1.0</data-api.version>
+		<parent>quiz-system</parent>
+	</properties>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<!-- VELOCITY-EXTENSIONS DEPENDENCY -->
+			<dependency>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>velocity-extensions</artifactId>
+				<version>${velocity-extensions.version}</version>
+			</dependency>
+		</dependencies>
+
+	</dependencyManagement>
+
+	<dependencies>
+
+		<!-- SPRING DEPENDENCIES -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<!-- VELOCITY-EXTENSIONS DEPENDENCY -->
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>velocity-extensions</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>jcommons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>xml-extensions</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>data-usertype</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>data-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>business-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>domain-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>rest-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.alpharogroup</groupId>
+			<artifactId>rest-client</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+
+		<pluginManagement>
+
+			<plugins>
+
+				<plugin>
+					<groupId>de.alpharogroup</groupId>
+					<artifactId>jpa-data-gen-maven-plugin</artifactId>
+					<version>1.0-SNAPSHOT</version>
+					<configuration>
+						<parentName>${parent}</parentName>
+						<dataProjectName>${parent}-data</dataProjectName>
+						<dataProjectVersion>1.0-SNAPSHOT</dataProjectVersion>
+						<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
+						<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
+						<persistenceunitName>quiz</persistenceunitName>
+						<password>secret</password>
+					</configuration>
+				</plugin>
+
+			</plugins>
+
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<inherited>true</inherited>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>de.alpharogroup</groupId>
+				<artifactId>jpa-data-gen-maven-plugin</artifactId>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+	<modules>
+		<module>gen-db-core</module>
+	</modules>
+</project>

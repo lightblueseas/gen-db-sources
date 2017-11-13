@@ -1,0 +1,37 @@
+package ${model.restPackageName}.client;
+
+import ${model.restPackageName}.api.${model.modelClassName}Resource;
+
+import org.testng.AssertJUnit;
+import org.testng.annotations.BeforeMethod;
+
+/**
+ * The class {@link ${model.modelClassName}RestClientTest}.
+ */
+public class ${model.modelClassName}RestClientTest
+{
+
+	/** The rest client. */
+	private ${model.modelClassName}RestClient restClient;
+
+	/** The ${model.modelClassName} rest resource. */
+	private ${model.modelClassName}Resource resource;
+
+	/**
+	 * Sets the up method.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
+	@BeforeMethod
+	public void setUpMethod() throws Exception
+	{
+		if (restClient == null)
+		{
+			restClient = new ${model.modelClassName}RestClient();
+			resource = restClient.getResource();
+			AssertJUnit.assertNotNull(resource);
+		}
+	}
+
+}

@@ -121,6 +121,7 @@
 					<artifactId>jpa-data-gen-maven-plugin</artifactId>
 					<version>1.0-SNAPSHOT</version>
 					<configuration>
+						<absoluteProjectPath>/home/astrapi69/git</absoluteProjectPath>
 						<parentName>${parent}</parentName>
 						<dataProjectName>${parent}-data</dataProjectName>
 						<dataProjectVersion>1.0-SNAPSHOT</dataProjectVersion>

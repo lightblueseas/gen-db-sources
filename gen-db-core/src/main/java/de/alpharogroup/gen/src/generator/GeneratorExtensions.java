@@ -192,6 +192,13 @@ public class GeneratorExtensions
 		final String pomGenerationModel = "PomGenerationModelBean.xml";
 
 		final PomGenerationModelBean generationData = loadPomGenerationModelBean(pomGenerationModel);
+		generate(generationData, false);
+
+
+	}
+
+	public static void generate(final PomGenerationModelBean generationData, final boolean withClasses) throws Exception
+	{
 		final VelocityContext context = new VelocityContext();
 		context.put("model", generationData);
 
@@ -342,7 +349,14 @@ public class GeneratorExtensions
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJettyRunnerClass(),
 			restWebProjectPath + "/" + applicationJettyRunnerClassPath);
 
-
+		if(withClasses) {
+			final ClassGenerationModelBean classGenerationModelBean = ClassGenerationModelBean.builder()
+				.basePackageName(generationData.getBasePackageName())
+				.build();
+			initWithdefaultValues(classGenerationModelBean);
+			generateRepositoryClasses(classGenerationModelBean,
+				generationData, true);
+		}
 	}
 
 	/**
@@ -355,14 +369,24 @@ public class GeneratorExtensions
 	 */
 	public static void generateRepositoryClasses(final boolean withProjectPath) throws Exception
 	{
-		initializeQualifiedModelClassNames(getClassGenerationModelBean());
+		final ClassGenerationModelBean classGenerationModelBean = getClassGenerationModelBean();
+		final PomGenerationModelBean pomGenerationModelBean = getPomGenerationModelBean();
+		generateRepositoryClasses(classGenerationModelBean,
+			pomGenerationModelBean, withProjectPath);
+
+	}
+
+	public static void generateRepositoryClasses(
+		final ClassGenerationModelBean classGenerationModelBean,
+		final PomGenerationModelBean pomGenerationModelBean, final boolean withProjectPath) throws Exception, IOException
+	{
+		initializeQualifiedModelClassNames(classGenerationModelBean);
 
 		final List<RepositoryClassModelBean> repositoryModels = getRepositoryClassModels(
-			getClassGenerationModelBean());
+			classGenerationModelBean);
 
-		generateClasses(getClassGenerationModelBean(), repositoryModels, getPomGenerationModelBean(),
+		generateClasses(classGenerationModelBean, repositoryModels, pomGenerationModelBean,
 			withProjectPath);
-
 	}
 
 	private static String getBusinessProjectPath(final PomGenerationModelBean generationData)
@@ -594,6 +618,12 @@ public class GeneratorExtensions
 		final String classGenerationModel)
 	{
 		final ClassGenerationModelBean generator = XmlExtensions.loadObject(classGenerationModel);
+		initWithdefaultValues(generator);
+		return generator;
+	}
+
+	public static void initWithdefaultValues(final ClassGenerationModelBean generator)
+	{
 		final String basePackageName = generator.getBasePackageName();
 		final String basePackagePath = PackageExtensions.getPackagePath(basePackageName);
 		if(StringUtils.isEmpty(generator.getServicePackageName())) {
@@ -644,7 +674,6 @@ public class GeneratorExtensions
 		if(StringUtils.isEmpty(generator.getSrcDomainServiceGenerationPackage())) {
 			generator.setSrcDomainServiceGenerationPackage(basePackagePath + "/domain/service/");
 		}
-		return generator;
 	}
 
 	/**

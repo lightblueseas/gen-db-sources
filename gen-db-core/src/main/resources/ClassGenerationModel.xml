@@ -2,13 +2,6 @@
 	<qualifiedModelClassNames class="linked-hash-set"/>
 	<!-- PACKAGE NAMES -->
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
-	<restPackageName>de.alpharogroup.questionaries.system.rest</restPackageName>
-	<modelPackageName>de.alpharogroup.questionaries.system.entities</modelPackageName>
-	<domainPackageName>de.alpharogroup.questionaries.system.domain</domainPackageName>
-	<domainMapperPackageName>de.alpharogroup.questionaries.system.mapper</domainMapperPackageName>
-	<repositoryPackageName>de.alpharogroup.questionaries.system.repositories</repositoryPackageName>
-	<servicePackageName>de.alpharogroup.questionaries.system.service</servicePackageName>
-	<domainServicePackageName>de.alpharogroup.questionaries.system.domain.service</domainServicePackageName>
 	<!-- SOURCE FOLDERS -->
 	<srcFolder>src/main/java/</srcFolder>
 	<srcTestFolder>src/test/java/</srcTestFolder>

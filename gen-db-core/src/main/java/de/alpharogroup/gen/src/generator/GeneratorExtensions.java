@@ -480,9 +480,45 @@ public class GeneratorExtensions
 				throw new RuntimeException(e.getMessage()
 					+ "\n by get the first type argument from the entity class " + modelClassName);
 			}
-
-
 			repositoryModels.add(model);
+			// NICE_TO_HAVE move package set out of the loop...
+			if(StringUtils.isNotEmpty(generator.getServicePackageName())) {
+				model.setServicePackageName(generator.getServicePackageName());
+			} else {
+				model.setServicePackageName(generator.getBasePackageName() + ".service");
+			}
+			if(StringUtils.isNotEmpty(generator.getDomainServicePackageName())) {
+				model.setDomainServicePackageName(generator.getDomainServicePackageName());
+			} else {
+				model.setDomainServicePackageName(generator.getBasePackageName() + ".domain.service");
+			}
+			if(StringUtils.isNotEmpty(generator.getModelPackageName())) {
+				final String modelPackageName = generator.getModelPackageName();
+				model.setModelPackageName(modelPackageName);
+			} else {
+				model.setModelPackageName(generator.getBasePackageName() + ".entities");
+			}
+			if(StringUtils.isNotEmpty(generator.getRepositoryPackageName())) {
+				model.setRepositoryPackageName(generator.getRepositoryPackageName());
+			} else {
+				model.setRepositoryPackageName(generator.getBasePackageName() + ".repositories");
+			}
+			if(StringUtils.isNotEmpty(generator.getDomainPackageName())) {
+				model.setDomainPackageName(generator.getDomainPackageName());
+			} else {
+				model.setDomainPackageName(generator.getBasePackageName() + ".domain");
+			}
+			if(StringUtils.isNotEmpty(generator.getDomainMapperPackageName())) {
+				model.setDomainMapperPackageName(generator.getDomainMapperPackageName());
+			} else {
+				model.setDomainMapperPackageName(generator.getBasePackageName() + ".domain.mapper");
+			}
+			if(StringUtils.isNotEmpty(generator.getRestPackageName())) {
+				model.setRestPackageName(generator.getRestPackageName());
+			} else {
+				model.setRestPackageName(generator.getBasePackageName() + ".rest");
+			}
+
 			final String repositoryClassName = modelClassName + FileSuffix.REPOSITORY;
 
 			final String serviceInterfaceName = modelClassName + FileSuffix.SERVICE;
@@ -492,10 +528,7 @@ public class GeneratorExtensions
 				.firstCharacterToLowerCase(serviceInterfaceName);
 			model.setServiceClassName(serviceInterfaceName);
 			model.setRepServiceClassName(repServiceClassName);
-			model.setServicePackageName(generator.getServicePackageName());
-			model.setDomainServicePackageName(generator.getDomainServicePackageName());
-			model.setModelPackageName(generator.getModelPackageName());
-			model.setRepositoryPackageName(generator.getRepositoryPackageName());
+
 			model.setModelQuilifiedClassName(clazz);
 			model.setRepSpringRefClassName(repSpringRefClassName);
 			model.setRepositoryClassName(repositoryClassName);
@@ -509,9 +542,6 @@ public class GeneratorExtensions
 				.firstCharacterToLowerCase(domainServiceInterfaceName);
 			model.setRepDomainServiceClassName(repDomainServiceClassName);
 			model.setDomainServiceClassName(domainServiceInterfaceName);
-			model.setDomainPackageName(generator.getDomainPackageName());
-			model.setDomainMapperPackageName(generator.getDomainMapperPackageName());
-			model.setRestPackageName(generator.getRestPackageName());
 
 		}
 		return repositoryModels;
@@ -549,6 +579,9 @@ public class GeneratorExtensions
 	public static void initializeQualifiedModelClassNames(
 		final ClassGenerationModelBean generationData) throws Exception
 	{
+		if(StringUtils.isEmpty(generationData.getModelPackageName())) {
+			generationData.setModelPackageName(generationData.getBasePackageName() + ".entities");
+		}
 		final Set<String> qualifiedModelClassNames = PackageExtensions
 			.scanClassNames(generationData.getModelPackageName());
 		generationData.setQualifiedModelClassNames(qualifiedModelClassNames);

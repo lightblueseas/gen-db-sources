@@ -1,4 +1,4 @@
-<de.alpharogroup.gen.src.model.PomGenerationBean>
+<de.alpharogroup.gen.src.model.PomGenerationModelBean>
 	<parentName>quiz-system</parentName>
 	<dataProjectName>quiz-system-data</dataProjectName>
 	<dataProjectVersion>1.0.0</dataProjectVersion>
@@ -6,4 +6,4 @@
 	<persistenceunitName>quiz</persistenceunitName>
 	<password>r2SB2FvFKHLcnyL0</password>	
 	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>				
-</de.alpharogroup.gen.src.model.PomGenerationBean>
+</de.alpharogroup.gen.src.model.PomGenerationModelBean>

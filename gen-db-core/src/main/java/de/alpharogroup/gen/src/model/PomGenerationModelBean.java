@@ -18,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(level=AccessLevel.PRIVATE)
-public class PomGenerationBean
+public class PomGenerationModelBean
 {
 	String absoluteProjectPath;
 	String basePackageName;

@@ -4,5 +4,6 @@
 	<dataProjectVersion>1.0.0</dataProjectVersion>
 	<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
 	<persistenceunitName>quiz</persistenceunitName>
-	<pw>r2SB2FvFKHLcnyL0</pw>				
+	<password>r2SB2FvFKHLcnyL0</password>	
+	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>				
 </de.alpharogroup.gen.src.model.PomGenerationBean>

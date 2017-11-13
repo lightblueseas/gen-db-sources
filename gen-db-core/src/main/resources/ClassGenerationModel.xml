@@ -1,18 +1,4 @@
 <de.alpharogroup.gen.src.model.ClassGenerationModelBean>
-	<qualifiedModelClassNames class="linked-hash-set"/>
 	<!-- PACKAGE NAMES -->
-	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
-	<!-- SOURCE FOLDERS -->
-	<srcFolder>src/main/java/</srcFolder>
-	<srcTestFolder>src/test/java/</srcTestFolder>
-	<templateDir>src/main/resources/</templateDir>
-	<!-- SOURCE GENERATION PACKAGE NAMES -->
-	<srcGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcGenerationPackage>
-	<srcRestGenerationPackage>de/alpharogroup/questionaries/system/rest/</srcRestGenerationPackage>
-	<srcTestGenerationPackage>de/alpharogroup/questionaries/system/repositories/</srcTestGenerationPackage>
-	<srcServiceGenerationPackage>de/alpharogroup/questionaries/system/service/</srcServiceGenerationPackage>
-	<srcDomainGenerationPackage>de/alpharogroup/questionaries/system/domain/</srcDomainGenerationPackage>
-	<srcDomainMapperGenerationPackage>de/alpharogroup/questionaries/system/mapper/</srcDomainMapperGenerationPackage>
-	<srcDomainServiceGenerationPackage>de/alpharogroup/questionaries/system/domain/service/</srcDomainServiceGenerationPackage>
-	
+	<basePackageName>de.alpharogroup.questionaries.system</basePackageName>	
 </de.alpharogroup.gen.src.model.ClassGenerationModelBean>

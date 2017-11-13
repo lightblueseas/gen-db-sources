@@ -597,8 +597,62 @@ public class GeneratorExtensions
 	public static ClassGenerationModelBean loadClassGenerationModel(
 		final String classGenerationModel)
 	{
-		final ClassGenerationModelBean generationData = XmlExtensions.loadObject(classGenerationModel);
-		return generationData;
+		final ClassGenerationModelBean generator = XmlExtensions.loadObject(classGenerationModel);
+		final String basePackageName = generator.getBasePackageName();
+		final String basePackagePath = PackageExtensions.getPackagePath(basePackageName);
+		if(StringUtils.isEmpty(generator.getServicePackageName())) {
+			generator.setServicePackageName(basePackageName + ".service");
+		}
+		if(StringUtils.isEmpty(generator.getDomainServicePackageName())) {
+			generator.setDomainServicePackageName(basePackageName + ".domain.service");
+		}
+		if(StringUtils.isEmpty(generator.getModelPackageName())) {
+			generator.setModelPackageName(basePackageName + ".entities");
+		}
+		if(StringUtils.isEmpty(generator.getRepositoryPackageName())) {
+			generator.setRepositoryPackageName(basePackageName + ".repositories");
+		}
+		if(StringUtils.isEmpty(generator.getDomainPackageName())) {
+			generator.setDomainPackageName(basePackageName + ".domain");
+		}
+		if(StringUtils.isEmpty(generator.getDomainMapperPackageName())) {
+			generator.setDomainMapperPackageName(basePackageName + ".domain.mapper");
+		}
+		if(StringUtils.isEmpty(generator.getRestPackageName())) {
+			generator.setRestPackageName(basePackageName + ".rest");
+		}
+		if(StringUtils.isEmpty(generator.getSrcFolder())) {
+			generator.setSrcFolder(PathFinder.SOURCE_FOLDER_SRC_MAIN_JAVA + "/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcTestFolder())) {
+			generator.setSrcTestFolder(PathFinder.SOURCE_FOLDER_SRC_TEST_JAVA+ "/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcGenerationPackage())) {
+			generator.setSrcGenerationPackage(basePackagePath + "/repositories/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcRestGenerationPackage())) {
+			generator.setSrcRestGenerationPackage(basePackagePath + "/rest/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcTestGenerationPackage())) {
+			generator.setSrcTestGenerationPackage(basePackagePath + "/repositories/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcServiceGenerationPackage())) {
+			generator.setSrcServiceGenerationPackage(basePackagePath + "/service/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcDomainGenerationPackage())) {
+			generator.setSrcDomainGenerationPackage(basePackagePath + "/domain/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcDomainMapperGenerationPackage())) {
+			generator.setSrcDomainMapperGenerationPackage(basePackagePath + "/mapper/");
+		}
+		if(StringUtils.isEmpty(generator.getSrcDomainServiceGenerationPackage())) {
+			generator.setSrcDomainServiceGenerationPackage(basePackagePath + "/domain/service/");
+		}
+
+
+
+
+		return generator;
 	}
 
 	/**

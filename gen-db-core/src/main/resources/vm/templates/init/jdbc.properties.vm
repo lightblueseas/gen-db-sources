@@ -5,5 +5,5 @@ jdbc.db.name           = ${model.persistenceunitName}
 jdbc.driver            = org.postgresql.Driver
 jdbc.file.encoding     = UTF-8
 jdbc.host              = localhost
-jdbc.password          = ${model.pw}
+jdbc.password          = ${model.password}
 jdbc.user              = postgres

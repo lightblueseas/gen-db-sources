@@ -1,5 +1,6 @@
 package de.alpharogroup.gen.src.model;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -15,16 +17,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@FieldDefaults(level=AccessLevel.PRIVATE)
 public class PomGenerationBean
 {
-	private String parentName;
-	private String pw;
+	String absoluteProjectPath;
+	String basePackageName;
 
-	private ClassGenerationModelBean classGenerationModel;
+	ClassGenerationModelBean classGenerationModel;
 
-	private String dataProjectName;
-	private String dataProjectVersion;
-	private String dataProjectParentVersion;
-	private String persistenceunitName;
+	String dataProjectName;
+
+	String dataProjectParentVersion;
+	String dataProjectVersion;
+	String parentName;
+	String password;
+    String persistenceunitName;
 
 }

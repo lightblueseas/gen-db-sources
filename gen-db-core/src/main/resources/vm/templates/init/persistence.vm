@@ -16,7 +16,7 @@
 			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
 			<property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/${model.persistenceunitName}" />
 			<property name="hibernate.connection.user" value="postgres" />
-			<property name="hibernate.connection.password" value="${model.pw}" />
+			<property name="hibernate.connection.password" value="${model.password}" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.event.merge.entity_copy_observer" value="allow"/>

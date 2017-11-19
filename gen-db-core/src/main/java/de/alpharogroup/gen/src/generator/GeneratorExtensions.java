@@ -1,3 +1,18 @@
+/**
+ * Copyright (C) 2015 Asterios Raptis
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.alpharogroup.gen.src.generator;
 
 import java.io.IOException;
@@ -77,7 +92,8 @@ public class GeneratorExtensions
 	 */
 	public static void generateClasses(final ClassGenerationModelBean generator,
 		final List<RepositoryClassModelBean> repositoryModels,
-		final PomGenerationModelBean pomGenerationData, final boolean withProjectPath) throws IOException
+		final PomGenerationModelBean pomGenerationData, final boolean withProjectPath)
+		throws IOException
 	{
 		for (final RepositoryClassModelBean model : repositoryModels)
 		{
@@ -191,13 +207,15 @@ public class GeneratorExtensions
 	{
 		final String pomGenerationModel = "PomGenerationModelBean.xml";
 
-		final PomGenerationModelBean generationData = loadPomGenerationModelBean(pomGenerationModel);
+		final PomGenerationModelBean generationData = loadPomGenerationModelBean(
+			pomGenerationModel);
 		generate(generationData, false);
 
 
 	}
 
-	public static void generate(final PomGenerationModelBean generationData, final boolean withClasses) throws Exception
+	public static void generate(final PomGenerationModelBean generationData,
+		final boolean withClasses) throws Exception
 	{
 		final VelocityContext context = new VelocityContext();
 		context.put("model", generationData);
@@ -349,13 +367,12 @@ public class GeneratorExtensions
 		VelocityExtensions.mergeToContext(context, getVelocityTemplates().getTmplJettyRunnerClass(),
 			restWebProjectPath + "/" + applicationJettyRunnerClassPath);
 
-		if(withClasses) {
-			final ClassGenerationModelBean classGenerationModelBean = ClassGenerationModelBean.builder()
-				.basePackageName(generationData.getBasePackageName())
-				.build();
+		if (withClasses)
+		{
+			final ClassGenerationModelBean classGenerationModelBean = ClassGenerationModelBean
+				.builder().basePackageName(generationData.getBasePackageName()).build();
 			initWithdefaultValues(classGenerationModelBean);
-			generateRepositoryClasses(classGenerationModelBean,
-				generationData, true);
+			generateRepositoryClasses(classGenerationModelBean, generationData, true);
 		}
 	}
 
@@ -371,14 +388,15 @@ public class GeneratorExtensions
 	{
 		final ClassGenerationModelBean classGenerationModelBean = getClassGenerationModelBean();
 		final PomGenerationModelBean pomGenerationModelBean = getPomGenerationModelBean();
-		generateRepositoryClasses(classGenerationModelBean,
-			pomGenerationModelBean, withProjectPath);
+		generateRepositoryClasses(classGenerationModelBean, pomGenerationModelBean,
+			withProjectPath);
 
 	}
 
 	public static void generateRepositoryClasses(
 		final ClassGenerationModelBean classGenerationModelBean,
-		final PomGenerationModelBean pomGenerationModelBean, final boolean withProjectPath) throws Exception, IOException
+		final PomGenerationModelBean pomGenerationModelBean, final boolean withProjectPath)
+		throws Exception, IOException
 	{
 		initializeQualifiedModelClassNames(classGenerationModelBean);
 
@@ -502,40 +520,62 @@ public class GeneratorExtensions
 			}
 			repositoryModels.add(model);
 			// NICE_TO_HAVE move package set out of the loop...
-			if(StringUtils.isNotEmpty(generator.getServicePackageName())) {
+			if (StringUtils.isNotEmpty(generator.getServicePackageName()))
+			{
 				model.setServicePackageName(generator.getServicePackageName());
-			} else {
+			}
+			else
+			{
 				model.setServicePackageName(generator.getBasePackageName() + ".service");
 			}
-			if(StringUtils.isNotEmpty(generator.getDomainServicePackageName())) {
+			if (StringUtils.isNotEmpty(generator.getDomainServicePackageName()))
+			{
 				model.setDomainServicePackageName(generator.getDomainServicePackageName());
-			} else {
-				model.setDomainServicePackageName(generator.getBasePackageName() + ".domain.service");
 			}
-			if(StringUtils.isNotEmpty(generator.getModelPackageName())) {
+			else
+			{
+				model.setDomainServicePackageName(
+					generator.getBasePackageName() + ".domain.service");
+			}
+			if (StringUtils.isNotEmpty(generator.getModelPackageName()))
+			{
 				final String modelPackageName = generator.getModelPackageName();
 				model.setModelPackageName(modelPackageName);
-			} else {
+			}
+			else
+			{
 				model.setModelPackageName(generator.getBasePackageName() + ".entities");
 			}
-			if(StringUtils.isNotEmpty(generator.getRepositoryPackageName())) {
+			if (StringUtils.isNotEmpty(generator.getRepositoryPackageName()))
+			{
 				model.setRepositoryPackageName(generator.getRepositoryPackageName());
-			} else {
+			}
+			else
+			{
 				model.setRepositoryPackageName(generator.getBasePackageName() + ".repositories");
 			}
-			if(StringUtils.isNotEmpty(generator.getDomainPackageName())) {
+			if (StringUtils.isNotEmpty(generator.getDomainPackageName()))
+			{
 				model.setDomainPackageName(generator.getDomainPackageName());
-			} else {
+			}
+			else
+			{
 				model.setDomainPackageName(generator.getBasePackageName() + ".domain");
 			}
-			if(StringUtils.isNotEmpty(generator.getDomainMapperPackageName())) {
+			if (StringUtils.isNotEmpty(generator.getDomainMapperPackageName()))
+			{
 				model.setDomainMapperPackageName(generator.getDomainMapperPackageName());
-			} else {
+			}
+			else
+			{
 				model.setDomainMapperPackageName(generator.getBasePackageName() + ".domain.mapper");
 			}
-			if(StringUtils.isNotEmpty(generator.getRestPackageName())) {
+			if (StringUtils.isNotEmpty(generator.getRestPackageName()))
+			{
 				model.setRestPackageName(generator.getRestPackageName());
-			} else {
+			}
+			else
+			{
 				model.setRestPackageName(generator.getBasePackageName() + ".rest");
 			}
 
@@ -599,7 +639,8 @@ public class GeneratorExtensions
 	public static void initializeQualifiedModelClassNames(
 		final ClassGenerationModelBean generationData) throws Exception
 	{
-		if(StringUtils.isEmpty(generationData.getModelPackageName())) {
+		if (StringUtils.isEmpty(generationData.getModelPackageName()))
+		{
 			generationData.setModelPackageName(generationData.getBasePackageName() + ".entities");
 		}
 		final Set<String> qualifiedModelClassNames = PackageExtensions
@@ -626,52 +667,68 @@ public class GeneratorExtensions
 	{
 		final String basePackageName = generator.getBasePackageName();
 		final String basePackagePath = PackageExtensions.getPackagePath(basePackageName);
-		if(StringUtils.isEmpty(generator.getServicePackageName())) {
+		if (StringUtils.isEmpty(generator.getServicePackageName()))
+		{
 			generator.setServicePackageName(basePackageName + ".service");
 		}
-		if(StringUtils.isEmpty(generator.getDomainServicePackageName())) {
+		if (StringUtils.isEmpty(generator.getDomainServicePackageName()))
+		{
 			generator.setDomainServicePackageName(basePackageName + ".domain.service");
 		}
-		if(StringUtils.isEmpty(generator.getModelPackageName())) {
+		if (StringUtils.isEmpty(generator.getModelPackageName()))
+		{
 			generator.setModelPackageName(basePackageName + ".entities");
 		}
-		if(StringUtils.isEmpty(generator.getRepositoryPackageName())) {
+		if (StringUtils.isEmpty(generator.getRepositoryPackageName()))
+		{
 			generator.setRepositoryPackageName(basePackageName + ".repositories");
 		}
-		if(StringUtils.isEmpty(generator.getDomainPackageName())) {
+		if (StringUtils.isEmpty(generator.getDomainPackageName()))
+		{
 			generator.setDomainPackageName(basePackageName + ".domain");
 		}
-		if(StringUtils.isEmpty(generator.getDomainMapperPackageName())) {
+		if (StringUtils.isEmpty(generator.getDomainMapperPackageName()))
+		{
 			generator.setDomainMapperPackageName(basePackageName + ".domain.mapper");
 		}
-		if(StringUtils.isEmpty(generator.getRestPackageName())) {
+		if (StringUtils.isEmpty(generator.getRestPackageName()))
+		{
 			generator.setRestPackageName(basePackageName + ".rest");
 		}
-		if(StringUtils.isEmpty(generator.getSrcFolder())) {
+		if (StringUtils.isEmpty(generator.getSrcFolder()))
+		{
 			generator.setSrcFolder(PathFinder.SOURCE_FOLDER_SRC_MAIN_JAVA + "/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcTestFolder())) {
-			generator.setSrcTestFolder(PathFinder.SOURCE_FOLDER_SRC_TEST_JAVA+ "/");
+		if (StringUtils.isEmpty(generator.getSrcTestFolder()))
+		{
+			generator.setSrcTestFolder(PathFinder.SOURCE_FOLDER_SRC_TEST_JAVA + "/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcGenerationPackage()))
+		{
 			generator.setSrcGenerationPackage(basePackagePath + "/repositories/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcRestGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcRestGenerationPackage()))
+		{
 			generator.setSrcRestGenerationPackage(basePackagePath + "/rest/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcTestGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcTestGenerationPackage()))
+		{
 			generator.setSrcTestGenerationPackage(basePackagePath + "/repositories/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcServiceGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcServiceGenerationPackage()))
+		{
 			generator.setSrcServiceGenerationPackage(basePackagePath + "/service/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcDomainGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcDomainGenerationPackage()))
+		{
 			generator.setSrcDomainGenerationPackage(basePackagePath + "/domain/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcDomainMapperGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcDomainMapperGenerationPackage()))
+		{
 			generator.setSrcDomainMapperGenerationPackage(basePackagePath + "/mapper/");
 		}
-		if(StringUtils.isEmpty(generator.getSrcDomainServiceGenerationPackage())) {
+		if (StringUtils.isEmpty(generator.getSrcDomainServiceGenerationPackage()))
+		{
 			generator.setSrcDomainServiceGenerationPackage(basePackagePath + "/domain/service/");
 		}
 	}
@@ -686,7 +743,8 @@ public class GeneratorExtensions
 	public static PomGenerationModelBean loadPomGenerationModelBean(final String pomGenerationBean)
 	{
 		final PomGenerationModelBean pomGeneration = XmlExtensions.loadObject(pomGenerationBean);
-		if(StringUtils.isEmpty(pomGeneration.getAbsoluteProjectPath())) {
+		if (StringUtils.isEmpty(pomGeneration.getAbsoluteProjectPath()))
+		{
 			pomGeneration.setAbsoluteProjectPath(".");
 		}
 		return pomGeneration;

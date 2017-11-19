@@ -13,39 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package de.alpharogroup.gen.src.model;
+package de.alpharogroup.questionaries.system.entities;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import de.alpharogroup.db.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
 
+@Entity
+@Table(name = "questions")
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
-@FieldDefaults(level = AccessLevel.PRIVATE)
-public class PomGenerationModelBean
+public class Questions extends BaseEntity<Integer>
 {
-	String absoluteProjectPath;
-	String basePackageName;
-
-	ClassGenerationModelBean classGenerationModel;
-
-	String dataProjectName;
-
-	String dataProjectParentVersion;
-	String dataProjectVersion;
-	String parentName;
-	String password;
-	String persistenceunitName;
+	private static final long serialVersionUID = 1L;
+	private String foo;
 
 }

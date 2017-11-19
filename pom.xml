@@ -10,21 +10,56 @@
 	</parent>
 
 	<artifactId>gen-db-sources</artifactId>
-	<version>0.9.1</version>
+	<version>0.9.3</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2015</inceptionYear>
 
 	<properties>
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.25.0</jcommons-lang.version>
+		<jcommons-lang.version>4.26.0</jcommons-lang.version>
 		<!-- VELOCITY-EXTENSIONS version -->
 		<velocity-extensions.version>1.1.0</velocity-extensions.version>
 		<!-- XML-EXTENSIONS version -->
 		<xml-extensions.version>4.17.0</xml-extensions.version>
-		<data-usertype.version>4.1.0</data-usertype.version>
-		<data-api.version>4.1.0</data-api.version>
-		<parent>quiz-system</parent>
 	</properties>
+
+	<name>${project.artifactId}</name>
+
+	<description>
+		This parent project is intented to generate repository and service classes from existing entity classes. 
+	</description>
+
+	<url>https://github.com/lightblueseas/gen-db-sources</url>
+
+	<licenses>
+
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git:@github.com:lightblueseas/gen-db-sources.git</connection>
+		<developerConnection>scm:git:git@github.com:lightblueseas/gen-db-sources.git</developerConnection>
+		<url>git:@github.com:lightblueseas/gen-db-sources.git</url>
+	</scm>
+
+	<ciManagement>
+		<system>travis-ci</system>
+		<url>https://travis-ci.org/lightblueseas/gen-db-sources</url>
+	</ciManagement>
+
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/lightblueseas/gen-db-sources/issues</url>
+	</issueManagement>
+
+	<modules>
+		<module>gen-db-core</module>
+	</modules>
 
 	<dependencyManagement>
 
@@ -112,29 +147,6 @@
 
 	<build>
 
-		<pluginManagement>
-
-			<plugins>
-
-				<plugin>
-					<groupId>de.alpharogroup</groupId>
-					<artifactId>jpa-data-gen-maven-plugin</artifactId>
-					<version>1.0-SNAPSHOT</version>
-					<configuration>
-						<parentName>${parent}</parentName>
-						<dataProjectName>${parent}-data</dataProjectName>
-						<dataProjectVersion>1.0-SNAPSHOT</dataProjectVersion>
-						<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
-						<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
-						<persistenceunitName>quiz</persistenceunitName>
-						<password>secret</password>
-					</configuration>
-				</plugin>
-
-			</plugins>
-
-		</pluginManagement>
-
 		<plugins>
 
 			<plugin>
@@ -146,16 +158,66 @@
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
 
-			<plugin>
-				<groupId>de.alpharogroup</groupId>
-				<artifactId>jpa-data-gen-maven-plugin</artifactId>
-			</plugin>
-
 		</plugins>
 
 	</build>
 
-	<modules>
-		<module>gen-db-core</module>
-	</modules>
+	<profiles>
+
+		<profile>
+			<id>generate-test-project</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+
+			<properties>
+				<data-usertype.version>4.1.0</data-usertype.version>
+				<data-api.version>4.1.0</data-api.version>
+				<parent>quiz-system</parent>
+			</properties>
+
+			<build>
+
+				<pluginManagement>
+
+					<plugins>
+
+						<plugin>
+							<groupId>de.alpharogroup</groupId>
+							<artifactId>jpa-data-gen-maven-plugin</artifactId>
+							<version>1.0-SNAPSHOT</version>
+							<configuration>
+								<absoluteProjectPath>/home/astrapi69/git</absoluteProjectPath>
+								<parentName>${parent}</parentName>
+								<dataProjectName>${parent}-data</dataProjectName>
+								<dataProjectVersion>1.0-SNAPSHOT</dataProjectVersion>
+								<basePackageName>de.alpharogroup.questionaries.system</basePackageName>
+								<dataProjectParentVersion>4.1.0</dataProjectParentVersion>
+								<persistenceunitName>quiz</persistenceunitName>
+								<password>secret</password>
+							</configuration>
+						</plugin>
+
+					</plugins>
+
+				</pluginManagement>
+
+				<plugins>
+
+					<plugin>
+						<groupId>de.alpharogroup</groupId>
+						<artifactId>jpa-data-gen-maven-plugin</artifactId>
+					</plugin>
+
+				</plugins>
+
+			</build>
+
+		</profile>
+
+	</profiles>
+
 </project>

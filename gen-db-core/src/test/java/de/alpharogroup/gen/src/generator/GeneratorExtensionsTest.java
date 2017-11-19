@@ -32,13 +32,13 @@ public class GeneratorExtensionsTest
 		log.info("System.getenv(\"HOME\"):" + envVarHome);
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testGenerateClasses() throws Exception
 	{
 		GeneratorExtensions.generateRepositoryClasses(true);
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testGeneratePomFiles() throws Exception
 	{
 		GeneratorExtensions.generatePomFiles();

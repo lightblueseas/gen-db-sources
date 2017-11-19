@@ -10,13 +10,13 @@
 	</parent>
 
 	<artifactId>gen-db-sources</artifactId>
-	<version>0.9.3</version>
+	<version>0.9.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<inceptionYear>2015</inceptionYear>
 
 	<properties>
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.26.0</jcommons-lang.version>
+		<jcommons-lang.version>4.27.0-SNAPSHOT</jcommons-lang.version>
 		<!-- VELOCITY-EXTENSIONS version -->
 		<velocity-extensions.version>1.1.0</velocity-extensions.version>
 		<!-- XML-EXTENSIONS version -->

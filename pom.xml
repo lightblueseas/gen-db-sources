@@ -16,7 +16,7 @@
 
 	<properties>
 		<!-- JCOMMONS-LANG version -->
-		<jcommons-lang.version>4.27.0-SNAPSHOT</jcommons-lang.version>
+		<jcommons-lang.version>4.27.0</jcommons-lang.version>
 		<!-- VELOCITY-EXTENSIONS version -->
 		<velocity-extensions.version>1.2.0</velocity-extensions.version>
 		<!-- XML-EXTENSIONS version -->

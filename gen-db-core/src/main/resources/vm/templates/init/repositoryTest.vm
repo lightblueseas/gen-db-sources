@@ -1,0 +1,24 @@
+package $model.repositoryPackageName;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.Test;
+
+import $model.modelQuilifiedClassName;
+
+@ContextConfiguration(locations = "classpath:test-applicationContext.xml")
+public class ${model.repositoryClassName}Test extends AbstractTestNGSpringContextTests 
+{
+
+    @Autowired
+	private $model.repositoryClassName $model.repSpringRefClassName;
+
+	@Test
+	public void testFindAll() {
+		List<$model.modelClassName> list = ${model.repSpringRefClassName}.findAll();
+	}
+
+}

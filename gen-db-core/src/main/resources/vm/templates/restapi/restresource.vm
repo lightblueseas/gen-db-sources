@@ -1,0 +1,27 @@
+package ${model.restPackageName};
+
+import javax.ws.rs.core.Response;
+
+import ${model.domainPackageName}.${model.domainClassName};
+
+import ${model.domainServicePackageName}.api.${model.domainClassName}Service;
+
+import ${model.restPackageName}.api.${model.modelClassName}Resource;
+
+import de.alpharogroup.service.rs.AbstractRestfulResource;
+
+/**
+ * The class {@link ${model.modelClassName}RestResource} provides an implementation of the inteface
+ * {@link ${model.modelClassName}Resource}.
+ */
+public class ${model.modelClassName}RestResource
+	extends
+		AbstractRestfulResource<$model.primaryKeyClassName, ${model.domainClassName}, ${model.domainClassName}Service>
+	implements
+		${model.modelClassName}Resource
+{
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+}

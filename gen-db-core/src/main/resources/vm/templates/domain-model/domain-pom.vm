@@ -8,34 +8,32 @@
 		<version>${model.dataProjectVersion}</version>
 	</parent>
 	
-	<artifactId>${model.parentName}-domain</artifactId>
+	<artifactId>${model.parentName}-domain-model</artifactId>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
 			<artifactId>domain-api</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>domain-mapper</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>${model.parentName}-domain-model</artifactId>
-		</dependency>
+		</dependency>	
 
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>${model.parentName}-entities</artifactId>
+			<artifactId>test-objects</artifactId>
+			<scope>test</scope>
 		</dependency>
-
+		<!-- MEANBEAN DEPENDENCY -->
+		<dependency>
+			<groupId>org.meanbean</groupId>
+			<artifactId>meanbean</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- JOBJECT-EVALUATE DEPENDENCY -->
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>${model.parentName}-business</artifactId>
-		</dependency>
+			<artifactId>jobject-evaluate</artifactId>
+			<scope>test</scope>
+		</dependency>	
 
 	</dependencies>
 	

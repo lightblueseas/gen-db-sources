@@ -229,14 +229,15 @@ public class GeneratorExtensions
 	{
 		final VelocityContext context = new VelocityContext();
 		context.put("model", generationData);
-
+		String fileName;
 		// Generate parent data pom.xml
 		final String parentProjectPath = getParentProjectPath(generationData);
 		final String parentDataPomClassPath = parentProjectPath + "/" + POM_XML_FILENAME;
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplDataPom(),
 			parentDataPomClassPath);
+		fileName = parentProjectPath + "/" + GITIGNORE_FILENAME;
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplGitignore(),
-			parentProjectPath + "/" + GITIGNORE_FILENAME);
+				fileName);
 
 		// Generate business pom.xml
 		final String businessProjectPath = getBusinessProjectPath(generationData);
@@ -294,7 +295,9 @@ public class GeneratorExtensions
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplJdbcH2Properties(),
 			initSrcMainResourcesPath + "/" + "jdbc-h2.properties");
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplJdbcProperties(),
-			initSrcMainResourcesPath + "/" + "jdbc.properties");
+				initSrcMainResourcesPath + "/" + "jdbc.properties");
+		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplEhcacheXml(),
+				initSrcMainResourcesPath + "/" + "ehcache.xml");
 
 		// Generate rest-api pom.xml
 		final String restApiProjectPath = getRestApiProjectPath(generationData);
@@ -336,7 +339,9 @@ public class GeneratorExtensions
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplJdbcH2Properties(),
 			restWebSrcMainResourcesPath + "/" + "jdbc-h2.properties");
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplJdbcProperties(),
-			restWebSrcMainResourcesPath + "/" + "jdbc.properties");
+				restWebSrcMainResourcesPath + "/" + "jdbc.properties");
+		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplEhcacheXml(),
+				restWebSrcMainResourcesPath + "/" + "ehcache.xml");
 
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context,
 			getVelocityTemplates().getTmplDataApplicationContextXml(),
@@ -368,8 +373,9 @@ public class GeneratorExtensions
 			+"db/init/"
 			+ DATABASE_INITIALIZATION_CLASSNAME
 			+ FileExtension.JAVA.getExtension();
+		fileName = initProjectPath + "/" + databaseInitializationClassPath;
 		VelocityExtensions.mergeToContext(getVelocityEngine(), context, getVelocityTemplates().getTmplInitDbInitClass(),
-			initProjectPath + "/" + databaseInitializationClassPath);
+				fileName);
 
 
 		// Velocity Template for the InitializeDatabase class...
@@ -738,7 +744,7 @@ public class GeneratorExtensions
 		}
 		if (StringUtils.isEmpty(generator.getSrcDomainMapperGenerationPackage()))
 		{
-			generator.setSrcDomainMapperGenerationPackage(basePackagePath + "/mapper/");
+			generator.setSrcDomainMapperGenerationPackage(basePackagePath + "/domain/mapper/");
 		}
 		if (StringUtils.isEmpty(generator.getSrcDomainServiceGenerationPackage()))
 		{

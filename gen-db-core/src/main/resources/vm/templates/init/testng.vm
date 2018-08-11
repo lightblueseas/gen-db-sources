@@ -4,9 +4,9 @@
 	<test name="Test">
 		<classes><!-- TODO enter a loop for repository classes and service classes -->
 		<!--
-			<class name="${model.classGenerationModel.repositoryPackageName}.${model.classGenerationModel.repositoryClassName}Test" />
-			<class name="${model.classGenerationModel.servicePackageName}.${model.classGenerationModel.modelClassName}BusinessServiceH2Test" />
-			<class name="${model.classGenerationModel.servicePackageName}.${model.classGenerationModel.modelClassName}BusinessServiceTest" />
+			<class name="${model.repositoryPackageName}.${model.repositoryClassName}Test" />
+			<class name="${model.servicePackageName}.${model.modelClassName}BusinessServiceH2Test" />
+			<class name="${model.servicePackageName}.${model.modelClassName}BusinessServiceTest" />
 		 -->
 		</classes>
 	</test> <!-- Test -->

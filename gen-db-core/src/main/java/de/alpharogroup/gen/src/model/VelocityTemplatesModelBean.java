@@ -61,6 +61,7 @@ public class VelocityTemplatesModelBean
 	String tmplLog4jProperties;
 	String tmplManifestMf;
 	String tmplPersistenceH2Xml;
+	String tmplEhcacheXml;
 	String tmplPersistenceXml;
 	String tmplProjectProperties;
 	String tmplRepositoryClass;

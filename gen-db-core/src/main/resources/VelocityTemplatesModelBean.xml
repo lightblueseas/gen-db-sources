@@ -19,6 +19,7 @@
 	<tmplDomainServiceClass>src/main/resources/vm/templates/domain/domainService.vm</tmplDomainServiceClass>
 	<tmplDomainServiceInterface>src/main/resources/vm/templates/domain/domainServiceinterface.vm</tmplDomainServiceInterface>	
 	<tmplInitDbInitClass>src/main/resources/vm/templates/init/DatabaseInitialization.vm</tmplInitDbInitClass>
+	<tmplEhcacheXml>src/main/resources/vm/templates/init/ehcache.vm</tmplEhcacheXml>
 	<tmplInitInitDbClass>src/main/resources/vm/templates/init/InitializeDatabase.vm</tmplInitInitDbClass>	
 	<tmplJdbcH2Properties>src/main/resources/vm/templates/init/jdbc-h2.properties.vm</tmplJdbcH2Properties>	
 	<tmplJdbcProperties>src/main/resources/vm/templates/init/jdbc.properties.vm</tmplJdbcProperties>

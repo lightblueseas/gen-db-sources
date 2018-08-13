@@ -32,8 +32,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class ClassGenerationModelBean
-{
+public class ClassGenerationModelBean {
 
 	/** the package names have the suffix:'PackageName' */
 	private String basePackageName;
@@ -50,7 +49,10 @@ public class ClassGenerationModelBean
 	private String srcDomainServiceGenerationPackage;
 	/** SOURCE FOLDERS have the prefix 'src'. */
 	private String srcFolder;
-	/** SOURCE GENERATION PACKAGE NAMES have the prefix 'scr' and the suffix 'GenerationPackage'. */
+	/**
+	 * SOURCE GENERATION PACKAGE NAMES have the prefix 'scr' and the suffix
+	 * 'GenerationPackage'.
+	 */
 	private String srcGenerationPackage;
 	private String srcRestGenerationPackage;
 	private String srcServiceGenerationPackage;

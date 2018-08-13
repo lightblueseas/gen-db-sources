@@ -24,7 +24,7 @@
 		
 		<dependency>
 			<groupId>de.alpharogroup</groupId>
-			<artifactId>${model.parentName}-domain-model</artifactId>
+			<artifactId>${model.parentName}-view-model</artifactId>
 		</dependency>
 
 		<dependency>

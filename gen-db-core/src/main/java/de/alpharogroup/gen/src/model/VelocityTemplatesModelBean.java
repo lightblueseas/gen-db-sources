@@ -33,8 +33,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class VelocityTemplatesModelBean
-{
+public class VelocityTemplatesModelBean {
 	/** TEMPLATE FILES have the prefix 'tmpl'. */
 
 	String tmplApplicationContextXml;
@@ -55,6 +54,7 @@ public class VelocityTemplatesModelBean
 	String tmplInitDbInitClass;
 	String tmplInitInitDbClass;
 	String tmplInitPom;
+	String tmplViewModelPom;
 	String tmplJdbcH2Properties;
 	String tmplJdbcProperties;
 	String tmplJettyRunnerClass;

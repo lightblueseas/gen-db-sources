@@ -8,7 +8,7 @@
 		<version>${model.dataProjectVersion}</version>
 	</parent>
 	
-	<artifactId>${model.parentName}-domain-model</artifactId>
+	<artifactId>${model.parentName}-view-model</artifactId>
 
 	<dependencies>
 
@@ -26,12 +26,6 @@
 		<dependency>
 			<groupId>org.meanbean</groupId>
 			<artifactId>meanbean</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- JOBJECT-EVALUATE DEPENDENCY -->
-		<dependency>
-			<groupId>de.alpharogroup</groupId>
-			<artifactId>jobject-evaluate</artifactId>
 			<scope>test</scope>
 		</dependency>	
 

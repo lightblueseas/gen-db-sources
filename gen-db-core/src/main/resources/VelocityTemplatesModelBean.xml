@@ -5,6 +5,7 @@
 	<tmplDomainPom>src/main/resources/vm/templates/domain/domain-pom.vm</tmplDomainPom>	
 	<tmplEntitiesPom>src/main/resources/vm/templates/entities/entities-pom.vm</tmplEntitiesPom>	
 	<tmplInitPom>src/main/resources/vm/templates/init/init-pom.vm</tmplInitPom>	
+	<tmplViewModelPom>src/main/resources/vm/templates/view-model/view-model-pom.vm</tmplViewModelPom>	
 	<tmplRestApiPom>src/main/resources/vm/templates/restapi/rest-api-pom.vm</tmplRestApiPom>	
 	<tmplRestClientPom>src/main/resources/vm/templates/restclient/rest-client-pom.vm</tmplRestClientPom>	
 	<tmplRestWebPom>src/main/resources/vm/templates/restweb/rest-web-pom.vm</tmplRestWebPom>
@@ -14,7 +15,7 @@
 	<tmplRepositoryClass>src/main/resources/vm/templates/entities/repository.vm</tmplRepositoryClass>
 	<tmplServiceClass>src/main/resources/vm/templates/business/service.vm</tmplServiceClass>
 	<tmplServiceInterface>src/main/resources/vm/templates/business/serviceinterface.vm</tmplServiceInterface>	
-	<tmplDomainClass>src/main/resources/vm/templates/domain/domain-object.vm</tmplDomainClass>		
+	<tmplDomainClass>src/main/resources/vm/templates/view-model/domain-object.vm</tmplDomainClass>		
 	<tmplDomainMapperClass>src/main/resources/vm/templates/domain/domain-mapper.vm</tmplDomainMapperClass>	
 	<tmplDomainServiceClass>src/main/resources/vm/templates/domain/domainService.vm</tmplDomainServiceClass>
 	<tmplDomainServiceInterface>src/main/resources/vm/templates/domain/domainServiceinterface.vm</tmplDomainServiceInterface>	

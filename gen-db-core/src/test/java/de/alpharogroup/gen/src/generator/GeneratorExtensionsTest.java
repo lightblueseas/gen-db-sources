@@ -20,12 +20,10 @@ import org.testng.annotations.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GeneratorExtensionsTest
-{
+public class GeneratorExtensionsTest {
 
 	@Test(enabled = true)
-	public void testdummy() throws Exception
-	{
+	public void testdummy() throws Exception {
 		final String userHome = System.getProperty("user.home");
 		log.info("System.getProperty(\"user.home\"):" + userHome);
 		final String envVarHome = System.getenv("HOME");
@@ -33,16 +31,13 @@ public class GeneratorExtensionsTest
 	}
 
 	@Test(enabled = true)
-	public void testGenerateClasses() throws Exception
-	{
+	public void testGenerateClasses() throws Exception {
 		GeneratorExtensions.generateRepositoryClasses(true);
 	}
 
 	@Test(enabled = true)
-	public void testGeneratePomFiles() throws Exception
-	{
+	public void testGeneratePomFiles() throws Exception {
 		GeneratorExtensions.generatePomFiles();
 	}
-
 
 }
